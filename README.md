@@ -1,4 +1,4 @@
-# leffat
+# leffatus
 Elokuvien arvostelusovellus
 
 Sovelluksessa näkyy elokuvia ja käyttäjien arvosteluita niistä. Arvostelut näkyvät myös käyttäjien profiileissa.
