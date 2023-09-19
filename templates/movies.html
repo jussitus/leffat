@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
+<h2>Elokuvat</h2>
+{% for movie in movies %}
+{{movie.movie_name}} {{movie.movie_year}}
+<hr>
+{% endfor %}
+{% endblock %}

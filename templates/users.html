@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}Käyttäjät{% endblock %}
+{% block content %}
+<h2>Käyttäjät</h2>
+{% for user in users %}
+<a href="/user/{{user.user_username}}">{{user.user_username}}</a>
+<hr>
+{% endfor %}
+{% endblock %}
