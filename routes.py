@@ -1,5 +1,5 @@
 from app import app
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, request, session, url_for
 import movies as m, users as u, reviews as r
 @app.route("/")
 def index():
@@ -20,12 +20,20 @@ def user(user_id):
     user = u.get_user(user_id)
     return render_template("user.html", user=user)
 
-@app.route("/movie/<movie_id>")
+@app.route("/movie/<movie_id>", methods=["GET", "POST"])
 def movie(movie_id):
-     movie = m.get_movie(movie_id)
-     reviews = r.get_movie_reviews(movie_id)
-     average_score = r.get_average_score(movie_id)
-     return render_template("movie.html", movie=movie, reviews=reviews, average_score=average_score)
+    if request.method == "GET":
+        movie = m.get_movie(movie_id)
+        reviews = r.get_movie_reviews(movie_id)
+        reviewed = any(session.get("id") == review.review_user_id for review in reviews)
+        average_score = 0 if len(reviews) == 0 else r.get_average_score(movie_id)
+        return render_template("movie.html", movie=movie, reviews=reviews, average_score=average_score, reviewed=reviewed)
+    if request.method == "POST":
+        user_id = session.get("id")
+        review_text = request.form["review_text"]
+        review_score = request.form["review_score"]
+        r.add_review(user_id, movie_id, review_text, review_score)
+        return redirect(url_for("movie", movie_id=movie_id))
 
 @app.route("/login",methods=["POST"])
 def login():
@@ -46,5 +54,5 @@ def signup():
 
 @app.route("/logout")
 def logout():
-    del session["username"]
+    session.clear()
     return redirect("/")

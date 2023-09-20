@@ -3,7 +3,18 @@
 {% block content %}
 <h2>{{movie.movie_name}}</h2>
 <h3>{{movie.movie_year}}</h3>
+{% if (reviews|length) > 0 %}
 <h4>{{average_score}}</h4>
+{% endif %}
+{% if session.username and not reviewed %}
+<hr>
+Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
+<form action="/movie/{{movie.movie_id}}" method="POST">
+    <input type="text" name="review_text" maxlength=600></p>
+    <input type="number" name="review_score" min="1" max="10" step="1">
+    <input type="submit" value="Lisää arvostelu">
+    </form>
+{% endif %}
 <hr>
 {% for review in reviews %}
 "{{review.review_text}}" {{review.review_score}}/10 - <a href="/user/{{review.review_user_id}}">{{review.user_username}}</a> {{review.review_date}}

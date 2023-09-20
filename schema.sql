@@ -15,7 +15,9 @@ CREATE TABLE reviews (
     review_movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
     review_date TIMESTAMP WITH TIME ZONE,
     review_text TEXT,
-    review_score INTEGER
+    review_score INTEGER,
+    UNIQUE (review_user_id, review_movie_id),
+    CHECK (review_score >= 1 AND review_score <= 10)
 );
 CREATE TABLE genres (
     genre_id SERIAL PRIMARY KEY,

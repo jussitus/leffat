@@ -8,6 +8,6 @@ def get_movies():
     return result.fetchall()
 
 def get_movie(id):
-    sql = text("SELECT movie_name, movie_year FROM movies WHERE movie_id=:id")
+    sql = text("SELECT movie_id, movie_name, movie_year FROM movies WHERE movie_id=:id")
     result = db.session.execute(sql, {"id":id})
     return result.fetchone()
