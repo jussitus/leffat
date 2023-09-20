@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}{{movie.movie_name}}{% endblock %}
+{% block content %}
+<h2>{{movie.movie_name}}</h2>
+<h3>{{movie.movie_year}}</h3>
+<h4>{{average_score}}</h4>
+<hr>
+{% for review in reviews %}
+"{{review.review_text}}" {{review.review_score}}/10 - <a href="/user/{{review.review_user_id}}">{{review.user_username}}</a> {{review.review_date}}
+<hr>
+{% endfor %} 
+{% endblock %}
