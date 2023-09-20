@@ -1,12 +1,12 @@
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    user_username TEXT,
+    user_username TEXT UNIQUE,
     user_password TEXT,
-    user_isadmin BOOLEAN
+    user_isadmin BOOLEAN ON DELETE CASCADE
 );
 CREATE TABLE movies (
     movie_id SERIAL PRIMARY KEY,
-    movie_name TEXT,
+    movie_name TEXT UNIQUE,
     movie_year INTEGER
 );
 CREATE TABLE reviews (
@@ -19,7 +19,7 @@ CREATE TABLE reviews (
 );
 CREATE TABLE genres (
     genre_id SERIAL PRIMARY KEY,
-    genre_name TEXT
+    genre_name TEXT UNIQUE
 );
 CREATE TABLE movies_genres (
     movies_genres_movie_id INTEGER REFERENCES movies,
