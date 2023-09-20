@@ -2,6 +2,15 @@
 {% block title %}Etusivu{% endblock %}
 {% block content %}
 <h2>Elokuvat</h2>
+{% if session.username%}
+Eikö elokuvaa löydy listalta? Voit lisätä sen itse!
+<form action="/movies" method="POST">
+    <input type="text" name="movie_name" maxlength=20 required>
+    <input type="number" name="movie_year" min="1900" max="2099" value="2023" step="1" required>
+    <input type="submit" value="Lisää elokuva">
+    </form>
+<hr>
+{% endif %}
 {% for movie in movies %}
 <a href="/movie/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.movie_year}})</a>
 <hr>

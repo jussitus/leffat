@@ -13,6 +13,11 @@ def get_users():
     result = db.session.execute(sql)
     return result.fetchall()
 
+def get_reviews(user_id):
+    sql = text("SELECT * FROM reviews, movies WHERE reviews.review_user_id=:user_id AND reviews.review_movie_id = movies.movie_id")
+    result = db.session.execute(sql, {"user_id":user_id})
+    return result.fetchall()
+
 
 def login(username, password):
     sql = text("SELECT user_id, user_password, user_isadmin FROM users WHERE user_username=:username")

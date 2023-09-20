@@ -1,21 +1,21 @@
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    user_username TEXT UNIQUE,
+    user_username TEXT NOT NULL UNIQUE,
     user_password TEXT,
     user_isadmin BOOLEAN
 );
 CREATE TABLE movies (
     movie_id SERIAL PRIMARY KEY,
-    movie_name TEXT UNIQUE,
-    movie_year INTEGER
+    movie_name TEXT NOT NULL UNIQUE,
+    movie_year INTEGER NOT NULL
 );
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
     review_user_id INTEGER REFERENCES users ON DELETE CASCADE,
     review_movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
     review_date TIMESTAMP WITH TIME ZONE,
-    review_text TEXT,
-    review_score INTEGER,
+    review_text TEXT NOT NULL,
+    review_score INTEGER NOT NULL,
     UNIQUE (review_user_id, review_movie_id),
     CHECK (review_score >= 1 AND review_score <= 10)
 );

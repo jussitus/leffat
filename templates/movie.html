@@ -10,9 +10,9 @@
 <hr>
 Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
 <form action="/movie/{{movie.movie_id}}" method="POST">
-    <input type="text" name="review_text" maxlength=600></p>
-    <input type="number" name="review_score" min="1" max="10" step="1">
-    <input type="submit" value="Lisää arvostelu">
+    <input type="text" name="review_text" maxlength=600 required/>
+    <input type="number" name="review_score" min="1" max="10" step="1" required/>
+    <input type="submit" value="Lisää arvostelu"/>
     </form>
 {% endif %}
 <hr>

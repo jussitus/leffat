@@ -5,11 +5,16 @@ import movies as m, users as u, reviews as r
 def index():
     return render_template("index.html")
 
-@app.route("/movies")
+@app.route("/movies", methods=["GET", "POST"])
 def movies():
-    movies = m.get_movies()
-    return render_template("movies.html", movies=movies)
-
+    if request.method == "GET":
+        movies = m.get_movies()
+        return render_template("movies.html", movies=movies)
+    if request.method == "POST":
+        movie_name = request.form["movie_name"]
+        movie_year = request.form["movie_year"]
+        m.add_movie(movie_name, movie_year)
+        return redirect("/movies")
 @app.route("/users")
 def users():
     users = u.get_users()
@@ -18,13 +23,14 @@ def users():
 @app.route("/user/<user_id>")
 def user(user_id):
     user = u.get_user(user_id)
-    return render_template("user.html", user=user)
+    reviews = u.get_reviews(user_id)
+    return render_template("user.html", user=user, reviews=reviews)
 
 @app.route("/movie/<movie_id>", methods=["GET", "POST"])
 def movie(movie_id):
     if request.method == "GET":
         movie = m.get_movie(movie_id)
-        reviews = r.get_movie_reviews(movie_id)
+        reviews = m.get_reviews(movie_id)
         reviewed = any(session.get("id") == review.review_user_id for review in reviews)
         average_score = 0 if len(reviews) == 0 else r.get_average_score(movie_id)
         return render_template("movie.html", movie=movie, reviews=reviews, average_score=average_score, reviewed=reviewed)

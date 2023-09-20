@@ -2,5 +2,12 @@
 {% block title %}{{user.user_username}}{% endblock %}
 {% block content %}
 <h2>{{user.user_username}}</h2>
-Käyttäjän {{user.user_username}} arvostelut:
+Käyttäjän {{user.user_username}} arvostelut
+<hr>
+{% for review in reviews %}
+{{review.movie_name}} ({{review.movie_year}}) - {{review.review_score}}/10 <br> 
+"{{review.review_text}}" <br>
+{{review.review_date}}
+<hr>
+{% endfor %}
 {% endblock %}
