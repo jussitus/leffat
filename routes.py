@@ -25,16 +25,24 @@ def movie(movie_id):
      movie = m.get_movie(movie_id)
      reviews = r.get_movie_reviews(movie_id)
      average_score = r.get_average_score(movie_id)
-     # MITEN SAAN NIMET??
      return render_template("movie.html", movie=movie, reviews=reviews, average_score=average_score)
 
 @app.route("/login",methods=["POST"])
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    # TODO: check username and password
-    session["username"] = username
+    u.login(username,password)
     return redirect("/")
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "GET":
+        return render_template("signup.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        u.signup(username,password, False)
+        return redirect("/")
 
 @app.route("/logout")
 def logout():

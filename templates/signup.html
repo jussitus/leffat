@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Rekisteröinti{% endblock %}
+{% block content %}
+<h2>Luo tunnus</h2>
+<form action="/signup" method="POST">
+<p>Tunnus:<br>
+<input type="text" name="username"></p>
+<p>Salasana:<br>
+<input type="password" name="password"></p>
+<input type="submit" value="Luo tunnus">
+</form>
+{% endblock %}
