@@ -13,6 +13,10 @@ def movies():
     if request.method == "POST":
         movie_name = request.form["movie_name"]
         movie_year = request.form["movie_year"]
+        if not (len(movie_name) > 0 and len(movie_name) <= 200):
+            return render_template("error.html", error="VIRHE: Elokuvan nimi ei ole 1-200 merkkiä pitkä.")
+        if not (int(movie_year) >= 1900 and int(movie_year) <= 2099):
+            return render_template("error.html", error="VIRHE: Vuosiluku ei ole väliltä 1900-2099.")
         m.add_movie(movie_name, movie_year)
         return redirect("/movies")
 @app.route("/users")
@@ -38,6 +42,10 @@ def movie(movie_id):
         user_id = session.get("id")
         review_text = request.form["review_text"]
         review_score = request.form["review_score"]
+        if not (len(review_text) <= 600 and len(review_text) > 0):
+            return render_template("error.html", error="VIRHE: Arvostelu ei ole 1-600 merkkiä pitkä.")
+        if not (int(review_score) > 0 and int(review_score) <= 10):
+            return render_template("error.html", error="VIRHE: Arvosana ei ole väliltä 1-10.")
         r.add_review(user_id, movie_id, review_text, review_score)
         return redirect(url_for("movie", movie_id=movie_id))
 
@@ -45,8 +53,10 @@ def movie(movie_id):
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    u.login(username,password)
-    return redirect("/")
+    if u.login(username,password):
+        return redirect("/")
+    else:
+        return render_template("error.html", error="VIRHE: Väärä tunnus tai salasana.") 
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -55,6 +65,10 @@ def signup():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        if not (len(username) > 0 and len(username) <= 30):
+            return render_template("error.html", error="VIRHE: Tunnuksen tulee olla 1-30 merkkiä pitkä.") 
+        if not (len(password) > 0 and len(password) <= 30):
+            return render_template("error.html", error="VIRHE: Salasanan tulee olla 1-30 merkkiä pitkä.") 
         u.signup(username,password, False)
         return redirect("/")
 

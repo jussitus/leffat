@@ -4,9 +4,9 @@
 <h2>Luo tunnus</h2>
 <form action="/signup" method="POST">
 <p>Tunnus:<br>
-<input type="text" name="username"></p>
+<input type="text" name="username" minlength=1 maxlength=30 required></p>
 <p>Salasana:<br>
-<input type="password" name="password"></p>
+<input type="password" name="password" minlength=1 maxlength=30 required></p>
 <input type="submit" value="Luo tunnus">
 </form>
 {% endblock %}

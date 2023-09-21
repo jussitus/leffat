@@ -5,7 +5,7 @@
 {% if session.username%}
 Eikö elokuvaa löydy listalta? Voit lisätä sen itse!
 <form action="/movies" method="POST">
-    <input type="text" name="movie_name" maxlength=20 required>
+    <input type="text" name="movie_name" maxlength=200 required>
     <input type="number" name="movie_year" min="1900" max="2099" value="2023" step="1" required>
     <input type="submit" value="Lisää elokuva">
     </form>
