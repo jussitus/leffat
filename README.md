@@ -22,6 +22,7 @@ Puuttuu
 - ulkoasu
 - elokuvien haku
 - ylläpitäjän toiminnot
+- tunnuksen poistaminen, arvostelujen muokkaaminen/poistaminen
 - kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta
 ## Sovelluksen testaaminen
 
