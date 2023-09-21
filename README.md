@@ -22,23 +22,26 @@ Puuttuu
 - ulkoasu
 - elokuvien haku
 - ylläpitäjän toiminnot
-- kaikenlaista muuta
+- kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta
 ## Sovelluksen testaaminen
 
-Voit testata sovellusta paikalliseti näin:
+Voit testata sovellusta paikallisesti näin:
 1. Kloonaa repo
 2. Suorita
-``` 
-$ python3 -m venv venv
-$ source venv/bin/activate
-(venv) $ pip install -r requirements.txt
-```
+
+        $ python3 -m venv venv
+        $ source venv/bin/activate
+        (venv) $ pip install -r requirements.txt
+
 3. Luo tietokanta ja sitten suorita
-```
-$ psql sun_tietokanta < schema.sql
-```
-4. Määritä ympäristömuuttujat SECRET_KEY (mikä tahansa) ja DATABASE_URL (mallia postgresql:///sun_tietokanta) esim. tiedostoon .env
+
+        $ psql sun_tietokanta < schema.sql
+        
+4. Määritä tarvittavat ympäristömuuttujat esim. tiedostoon .env näin
+
+        SECRET_KEY=jotain_ihan_mitä_vaan
+        DATABASE_URL=postgresql:///sun_tietokanta
+
 5. Suorita
-```
-$ flask run
-```
+
+        $ flask run
