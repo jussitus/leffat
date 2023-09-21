@@ -69,8 +69,10 @@ def signup():
             return render_template("error.html", error="VIRHE: Tunnuksen tulee olla 1-30 merkkiä pitkä.") 
         if not (len(password) > 0 and len(password) <= 30):
             return render_template("error.html", error="VIRHE: Salasanan tulee olla 1-30 merkkiä pitkä.") 
-        u.signup(username,password, False)
-        return redirect("/")
+        if u.signup(username,password, False):
+            return redirect("/")
+        else:
+            return render_template("error.html", error="VIRHE: Tunnuksen luominen ei onnistunut :()")  
 
 @app.route("/logout")
 def logout():
