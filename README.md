@@ -17,7 +17,7 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Elokuvien ja käyttäjien sivuilla listaus arvosteluista
 - Elokuvien sivuilla voi lisätä arvostelun
 - Elokuvien listaan voi lisätä elokuvan
-- Sivun ulkoasu
+- Sovelluksen ulkoasu
 Puuttuu
 - elokuvien haku
 - ylläpitäjän toiminnot
