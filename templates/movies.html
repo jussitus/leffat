@@ -11,8 +11,12 @@ Eikö elokuvaa löydy listalta? Voit lisätä sen itse!
     </form>
 <hr>
 {% endif %}
+{% if (movies|length) > 0 %}
 {% for movie in movies %}
 <a href="/movie/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.movie_year}})</a>
 <br>
 {% endfor %}
+{% else %}
+Yhtään elokuvaa ei ole vielä lisätty...
+{% endif %}
 {% endblock %}

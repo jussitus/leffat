@@ -4,6 +4,7 @@ body {
     max-width: 45em;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
 h1 {
     margin: .5em 0;
 }
@@ -33,7 +34,7 @@ nav a {
 nav a:focus {
     background: orange;
     color: black
-  }
+}
 
 nav a:hover {
     background: orange;
@@ -49,7 +50,11 @@ nav a:hover {
 }
 
 .content {
-    padding: 0 1em;
+    padding: 1em 1em;
+}
+
+.content h2 {
+    margin-top: 0;
 }
 
 .content a {
@@ -58,3 +63,20 @@ nav a:hover {
     color: firebrick;
     line-height: 1.5;
 }
+
+.content hr {
+    border: none;
+    border-top: 3px double firebrick;
+    color: firebrick;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+  }
+
+.content hr:after {
+    background: wheat;
+    content: '🎥';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+  }
