@@ -2,9 +2,9 @@
 {% set active_page = "index" %}
 {% block title %}Etusivu{% endblock %}
 {% block content %}
-Tervetuloa arvostelemaan elokuvia.
+Leffatus on sovellus, jossa voit arvostella katsomiasi elokuvia. Tervetuloa!
 {% if session.username %}
-<p>Olet käyttäjä {{ session.username }}</p>
+<p>Olet käyttäjä <a href="/user/{{session.id}}">{{session.username}}</a>.</p>
 <hr>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}

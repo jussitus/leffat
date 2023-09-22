@@ -2,8 +2,11 @@
 {% set active_page = "users" %}
 {% block title %}{{user.user_username}}{% endblock %}
 {% block content %}
-<h2>{{user.user_username}}</h2>
-Käyttäjän {{user.user_username}} arvostelut
+{% if (reviews|length) > 0 %}
+Käyttäjän <b>{{user.user_username}}</b> arvostelut
+{% else %}
+Käyttäjä <b>{{user.user_username}}</b> ei ole vielä arvostellut yhtään elokuvaa.
+{% endif %}
 <hr>
 {% for review in reviews %}
 <a href="/movie/{{review.movie_id}}">{{review.movie_name}} ({{review.movie_year}})</a> - {{review.review_score}}/10 <br> 

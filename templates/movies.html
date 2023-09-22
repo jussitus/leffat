@@ -2,7 +2,7 @@
 {% set active_page = "movies" %}
 {% block title %}Elokuvat{% endblock %}
 {% block content %}
-{% if session.username%}
+{% if session.username %}
 Eikö elokuvaa löydy listalta? Voit lisätä sen itse!<br>
 <form action="/movies" method="POST">
     <label for="movie_name">Elokuvan nimi</label>
