@@ -35,23 +35,25 @@ def get_movie(movie_id):
     return result.fetchone()
 
 
-def add_movie(movie_name, movie_year):
+def add_movie(movie_name, movie_year, movie_runtime):
     try:
         sql = text(
             """
                 INSERT INTO movies 
                     (
                         movie_name,
-                        movie_year
+                        movie_year,
+                        movie_runtime
                     )
                 VALUES 
                     (
                         :movie_name,
-                        :movie_year
+                        :movie_year,
+                        :movie_runtime
                     )
             """
         )
-        db.session.execute(sql, {"movie_name": movie_name, "movie_year": movie_year})
+        db.session.execute(sql, {"movie_name": movie_name, "movie_year": movie_year, "movie_runtime":movie_runtime})
         db.session.commit()
         return True
     except:

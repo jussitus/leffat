@@ -31,7 +31,7 @@ CREATE TABLE movies_genres (
 );
 CREATE TABLE directors (
     director_id SERIAL PRIMARY KEY,
-    director_name TEXT NOT NULL UNIQUE,
+    director_name TEXT NOT NULL UNIQUE
 );
 CREATE TABLE movies_directors (
     movies_directors_movie_id INTEGER REFERENCES movies ON DELETE CASCADE,

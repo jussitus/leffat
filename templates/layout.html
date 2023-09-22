@@ -9,9 +9,9 @@
     </div>
     <nav>
         
-            <li><a href="/">Etusivu</a></li>
-            <li><a href="/movies">Elokuvat</a></li>
-            <li><a href="/users">Käyttäjät</a></li>
+            <li><a {% if active_page == "index" %} class="active"{% endif %} href="/">Etusivu</a></li>
+            <li><a {% if active_page == "movies" %} class="active"{% endif %} href="/movies">Elokuvat</a></li>
+            <li><a {% if active_page == "users" %} class="active"{% endif %} href="/users">Käyttäjät</a></li>
         
     </nav>
     <div class="content">{% block content %} {% endblock %}</div>

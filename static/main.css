@@ -1,5 +1,6 @@
 body {
     background: wheat;
+    border: solid orangered;
     margin: auto;
     max-width: 45em;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -31,15 +32,17 @@ nav a {
     padding: .5em;
 }
 
-nav a:focus {
-    background: orange;
-    color: black
+nav a:focus, .active {
+    background: orangered;
+    color: wheat
 }
 
+
 nav a:hover {
-    background: orange;
-    color: black
+    background: orangered;
+    color: wheat
 }
+
 
 .header {
     background: orangered;
@@ -50,7 +53,7 @@ nav a:hover {
 }
 
 .content {
-    padding: 1em 1em;
+    padding: 1em .75em;
 }
 
 .content h2 {
@@ -80,3 +83,27 @@ nav a:hover {
     position: relative;
     top: -13px;
   }
+
+.content form {
+    display: grid;
+    max-width: 30em;
+    grid-template-columns: 10em 10em;
+    grid-row-gap: .3em;
+    padding: 5px;
+    text-align: left;
+    width: 20em;
+    margin: auto 0;
+    align-items: center;
+}
+
+.content form.review {
+    display: grid;
+    max-width: 45em;
+    grid-template-columns: 10em 30em;
+    grid-row-gap: .3em;
+    padding: 5px;
+    text-align: left;
+    width: 50em;
+    margin: auto 0;
+    align-items: center;
+}
