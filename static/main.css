@@ -2,12 +2,15 @@ body {
     background: wheat;
     margin: auto;
     max-width: 45em;
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 h1 {
     margin: .5em 0;
 }
 
+nav {
+    display: flex;
+}
 
 nav li {
     display: inline-block;
@@ -15,14 +18,10 @@ nav li {
     margin: 0;
 }
 
-hr {
-    margin: 0;
-    padding: 0;
-}
 
-a {
+nav a {
     background: wheat;
-    flex: 1;
+    font-size: 1.5em;
     text-decoration: none;
     outline: none;
     text-align: center;
@@ -31,12 +30,12 @@ a {
     padding: .5em;
 }
 
-a:focus {
+nav a:focus {
     background: orange;
     color: black
   }
 
-a:hover {
+nav a:hover {
     background: orange;
     color: black
 }
@@ -51,4 +50,11 @@ a:hover {
 
 .content {
     padding: 0 1em;
+}
+
+.content a {
+    text-decoration: none;
+    outline: none;
+    color: firebrick;
+    line-height: 1.5;
 }
