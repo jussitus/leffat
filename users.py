@@ -47,6 +47,8 @@ def get_reviews(user_id):
                 reviews.review_user_id=:user_id 
             AND 
                 reviews.review_movie_id = movies.movie_id
+            ORDER BY
+                movies.movie_name
         """
     )
     result = db.session.execute(sql, {"user_id": user_id})
