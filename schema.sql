@@ -7,7 +7,8 @@ CREATE TABLE users (
 CREATE TABLE movies (
     movie_id SERIAL PRIMARY KEY,
     movie_name TEXT NOT NULL UNIQUE,
-    movie_year INTEGER NOT NULL
+    movie_year INTEGER NOT NULL,
+    movie_runtime INTEGER NOT NULL
 );
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
@@ -25,6 +26,15 @@ CREATE TABLE genres (
 );
 CREATE TABLE movies_genres (
     movies_genres_movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
-    movies_genres_genre_id INTEGER REFERENCES movies ON DELETE CASCADE,
+    movies_genres_genre_id INTEGER REFERENCES genres ON DELETE CASCADE,
     PRIMARY KEY (movies_genres_movie_id, movies_genres_genre_id)
+);
+CREATE TABLE directors (
+    director_id SERIAL PRIMARY KEY,
+    director_name TEXT NOT NULL UNIQUE,
+);
+CREATE TABLE movies_directors (
+    movies_directors_movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
+    movies_directors_director_id INTEGER REFERENCES directors ON DELETE CASCADE,
+    PRIMARY KEY (movies_directors_movie_id, movies_directors_director_id)
 );

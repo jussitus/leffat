@@ -1,12 +1,17 @@
 {% extends "layout.html" %}
+{% set active_page = "movies" %}
 {% block title %}Elokuvat{% endblock %}
 {% block content %}
 <h2>Elokuvat</h2>
 {% if session.username%}
-Eikö elokuvaa löydy listalta? Voit lisätä sen itse!
+Eikö elokuvaa löydy listalta? Voit lisätä sen itse!<br>
 <form action="/movies" method="POST">
-    <input type="text" name="movie_name" minlength=1 maxlength=200 required>
-    <input type="number" name="movie_year" min="1900" max="2099" value="2023" step="1" required>
+    <label for="movie_name">Elokuvan nimi</label>
+    <input type="text" id="movie_name" name="movie_name" minlength=1 maxlength=200 required>
+    <label for="movie_name">Julkaisuvuosi</label>
+    <input type="number" id="movie_year" name="movie_year" min="1900" max="2099" value="2023" step="1" required>
+    <label for="movie_runtime">Kesto (minuuttia)</label>
+    <input type="number" id="movie_runtime "name="movie_runtime" min="1" max="2000" required>
     <input type="submit" value="Lisää elokuva">
     </form>
 <hr>
