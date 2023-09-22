@@ -1,8 +1,18 @@
 <!doctype html>
-<title>Leffatus - {% block title %}{% endblock %}</title>
-<h1>Leffatus</h1>
-<a href="/">Etusivu</a>
-<a href="/movies">Elokuvat</a>
-<a href="/users">Käyttäjät</a>
-<hr>
-{% block content %} {% endblock %}
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+    <title>Leffatus - {% block title %}{% endblock %}</title>
+    <div class="header">
+        <h1>Leffatus</h1>
+    </div>
+    <nav>
+        
+            <li><a href="/">Etusivu</a></li>
+            <li><a href="/movies">Elokuvat</a></li>
+            <li><a href="/users">Käyttäjät</a></li>
+        
+    </nav>
+    <div class="content">{% block content %} {% endblock %}</div>
+</body>

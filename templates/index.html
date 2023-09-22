@@ -1,18 +1,19 @@
 {% extends "layout.html" %}
 {% block title %}Etusivu{% endblock %}
 {% block content %}
-<h2>Etusivu</h2>
-Tervetuloa arvostelemaan elokuvia. 
+Tervetuloa arvostelemaan elokuvia.
 {% if session.username %}
 <p>Olet käyttäjä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
+    <p>Tunnus:<br>
+        <input type="text" name="username">
+    </p>
+    <p>Salasana:<br>
+        <input type="password" name="password">
+    </p>
+    <input type="submit" value="Kirjaudu">
 </form>
 <hr>
 Eikö sinulla ole vielä tunnusta? <a href="/signup">Rekisteröidy</a> nyt!
