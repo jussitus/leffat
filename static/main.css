@@ -1,8 +1,13 @@
+html {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+}
+
 body {
     background: wheat;
     border: solid orangered;
     margin: auto;
-    max-width: 45em;
+    max-width: 50em;
     font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -114,9 +119,13 @@ nav a:hover {
 .content td {
     border: solid orangered;
     padding: .5em;
+    word-wrap: break-word;
+    max-width: 30em;
 }
 
 .content table {
     border-collapse: collapse;
+    table-layout: auto; 
+    width: 100%;
 }
 

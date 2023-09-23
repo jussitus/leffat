@@ -28,7 +28,7 @@ Eikö elokuvaa löydy listalta? Voit lisätä sen itse!<br>
         <tr>
             <td><a href="/movie/{{movie.movie_id}}">{{movie.movie_name}}</a></td>
             <td>{{movie.movie_year}}</td>
-            <td>{{movie.movie_runtime}} min</td>
+            <td style="white-space: nowrap;">{{movie.movie_runtime}} min</td>
             <td>{% if movie.avg != None %} {{(movie.avg|round(2))}} {% else %}-{% endif %}</td>
         </tr>
         {% endfor %}
