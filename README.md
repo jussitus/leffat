@@ -27,7 +27,7 @@ Puuttuu
 
 Voit testata sovellusta paikallisesti näin:
 1. Kloonaa repo
-2. Suorita
+2. Suorita leffatus-hakemistossa
 
         $ python3 -m venv venv
         $ source venv/bin/activate

@@ -3,15 +3,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <body>
-    <title>Leffatus - {% block title %}{% endblock %}</title>
+    <title>leffatus - {% block title %}{% endblock %}</title>
     <div class="header">
-        <h1>Leffatus</h1>
+        <h1>leffatus</h1>
     </div>
     <nav>
         
-            <li><a {% if active_page == "index" %} class="active"{% endif %} href="/">Etusivu</a></li>
-            <li><a {% if active_page == "movies" %} class="active"{% endif %} href="/movies">Elokuvat</a></li>
-            <li><a {% if active_page == "users" %} class="active"{% endif %} href="/users">Käyttäjät</a></li>
+            <li><a {% if active_page == "index" %} class="active"{% endif %} href="/">etusivu</a></li>
+            <li><a {% if active_page == "movies" %} class="active"{% endif %} href="/movies">elokuvat</a></li>
+            <li><a {% if active_page == "users" %} class="active"{% endif %} href="/users">käyttäjät</a></li>
         
     </nav>
     <div class="content">{% block content %} {% endblock %}</div>
