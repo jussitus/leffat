@@ -98,12 +98,15 @@ nav a:hover {
 
 .content form.review {
     display: grid;
-    max-width: 45em;
-    grid-template-columns: 10em 30em;
+    max-width: 40em;
+    grid-template-columns: 5em 30em;
     grid-row-gap: .3em;
     padding: 5px;
     text-align: left;
-    width: 50em;
     margin: auto 0;
     align-items: center;
+}
+
+.content form.review div input[type=submit] {
+    margin-left: 1em;
 }

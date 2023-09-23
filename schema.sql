@@ -18,7 +18,7 @@ CREATE TABLE reviews (
     review_text TEXT NOT NULL,
     review_score INTEGER NOT NULL,
     UNIQUE (review_user_id, review_movie_id),
-    CHECK (review_score >= 1 AND review_score <= 10)
+    CHECK (review_score >= 1 AND review_score <= 5)
 );
 CREATE TABLE genres (
     genre_id SERIAL PRIMARY KEY,

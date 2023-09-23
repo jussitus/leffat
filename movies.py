@@ -1,6 +1,7 @@
 from sqlalchemy.sql import text
 from db import db
 
+
 def get_movies():
     sql = text(
         """
@@ -53,7 +54,14 @@ def add_movie(movie_name, movie_year, movie_runtime):
                     )
             """
         )
-        db.session.execute(sql, {"movie_name": movie_name, "movie_year": movie_year, "movie_runtime":movie_runtime})
+        db.session.execute(
+            sql,
+            {
+                "movie_name": movie_name,
+                "movie_year": movie_year,
+                "movie_runtime": movie_runtime,
+            },
+        )
         db.session.commit()
         return True
     except:

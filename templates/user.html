@@ -9,9 +9,9 @@ Käyttäjä <b>{{user.user_username}}</b> ei ole vielä arvostellut yhtään elo
 {% endif %}
 <hr>
 {% for review in reviews %}
-<a href="/movie/{{review.movie_id}}">{{review.movie_name}} ({{review.movie_year}})</a> - {{review.review_score}}/10 <br> 
+<a href="/movie/{{review.movie_id}}">{{review.movie_name}} ({{review.movie_year}})</a> - {% for i in range(review.review_score) %}★{% endfor %} <br> 
 "{{review.review_text}}" <br>
-{{review.review_date}}
+{{review.review_date.strftime("(%-d.%-m.%Y %-H:%-M)")}}
 <hr>
 {% endfor %}
 {% endblock %}

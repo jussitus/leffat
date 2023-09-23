@@ -76,7 +76,7 @@ def movie(movie_id):
                 "error.html", error="VIRHE: Arvostelu ei ole 1-600 merkkiä pitkä."
             )
         if not (review_score.isdigit()) or not (
-            int(review_score) > 0 and int(review_score) <= 10
+            int(review_score) > 0 and int(review_score) <= 5
         ):
             return render_template(
                 "error.html", error="VIRHE: Arvosana ei ole väliltä 1-10."
