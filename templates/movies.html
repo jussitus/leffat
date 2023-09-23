@@ -10,16 +10,30 @@ Eikö elokuvaa löydy listalta? Voit lisätä sen itse!<br>
     <label for="movie_name">Julkaisuvuosi</label>
     <input type="number" id="movie_year" name="movie_year" min="1900" max="2099" value="2023" step="1" required>
     <label for="movie_runtime">Kesto (minuuttia)</label>
-    <input type="number" id="movie_runtime "name="movie_runtime" min="1" max="2000" required>
+    <input type="number" id="movie_runtime " name="movie_runtime" min="1" max="2000" required>
     <input type="submit" value="Lisää elokuva">
-    </form>
+</form>
 <hr>
 {% endif %}
 {% if (movies|length) > 0 %}
-{% for movie in movies %}
-<a href="/movie/{{movie.movie_id}}">{{movie.movie_name}} ({{movie.movie_year}})</a>
-<br>
-{% endfor %}
+<table>
+    <tbody>
+        <tr>
+            <td>Elokuva</td>
+            <td>Vuosi</td>
+            <td>Kesto</td>
+            <td>Arvosana</td>
+        </tr>
+        {% for movie in movies %}
+        <tr>
+            <td><a href="/movie/{{movie.movie_id}}">{{movie.movie_name}}</a></td>
+            <td>{{movie.movie_year}}</td>
+            <td>{{movie.movie_runtime}} min</td>
+            <td>{% if movie.avg != None %} {{(movie.avg|round(2))}} {% else %}-{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% else %}
 Yhtään elokuvaa ei ole vielä lisätty...
 {% endif %}

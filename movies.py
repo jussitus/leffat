@@ -6,13 +6,16 @@ def get_movies():
     sql = text(
         """
             SELECT
-                movie_id,
-                movie_name,
-                movie_year
-            FROM 
-                movies 
+                movies.*,
+                AVG(reviews.review_score)
+            FROM
+                movies LEFT JOIN reviews
+            ON
+                movies.movie_id = reviews.review_movie_id
+            GROUP BY
+                movies.movie_id
             ORDER BY
-                movie_name
+                movies.movie_name
         """
     )
     result = db.session.execute(sql)

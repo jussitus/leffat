@@ -110,3 +110,13 @@ nav a:hover {
 .content form.review div input[type=submit] {
     margin-left: 1em;
 }
+
+.content td {
+    border: solid orangered;
+    padding: .5em;
+}
+
+.content table {
+    border-collapse: collapse;
+}
+
