@@ -6,7 +6,10 @@ def get_movies():
     sql = text(
         """
             SELECT
-                movies.*,
+                movies.movie_id,
+                movies.movie_name,
+                movies.movie_year,
+                movies.movie_runtime,
                 AVG(reviews.review_score)
             FROM
                 movies LEFT JOIN reviews

@@ -39,7 +39,11 @@ def get_reviews(user_id):
     sql = text(
         """
             SELECT
-                *
+                movies.movie_name,
+                movies.movie_year,
+                reviews.review_score,
+                reviews.review_text,
+                reviews.review_date
             FROM 
                 reviews,
                 movies
