@@ -22,6 +22,7 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 Puuttuu
 - elokuvien haku
 - ylläpitäjän toiminnot
+- peruskäyttäjien rajoittaminen, esim. elokuvaehdotukset menevät jonoon jonka ylläpitäjä käsittelee
 - tunnuksen poistaminen, arvostelujen muokkaaminen/poistaminen
 - kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta
 ## Sovelluksen testaaminen
