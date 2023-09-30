@@ -10,10 +10,15 @@ def index():
     return render_template("index.html")
 
 
+# pylint says too many returns
 @app.route("/movies", methods=["GET", "POST"])
 def movies():
     if request.method == "GET":
-        movies = m.get_movies()
+        query = request.args
+        try:
+            movies = m.get_movies(query)
+        except:
+            return render_template("error.html", error="VIRHE: Virheellinen haku.")
         return render_template("movies.html", movies=movies)
     if request.method == "POST":
         movie_name = request.form["movie_name"]

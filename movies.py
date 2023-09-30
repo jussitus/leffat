@@ -2,9 +2,15 @@ from sqlalchemy.sql import text
 from db import db
 
 
-def get_movies():
-    sql = text(
-        """
+def get_movies(query):
+    name = query.get("name", default="")
+    min_year = query.get("min_year", default=1900)
+    max_year = query.get("max_year", default=2099)
+    min_runtime = query.get("min_runtime", default=1)
+    max_runtime = query.get("max_runtime", default=2000)
+    sort = query.get("sort", default="name")
+
+    sql = """
             SELECT
                 movies.movie_id,
                 movies.movie_name,
@@ -15,13 +21,33 @@ def get_movies():
                 movies LEFT JOIN reviews
             ON
                 movies.movie_id = reviews.review_movie_id
+            WHERE
+                LOWER(movies.movie_name) LIKE LOWER(:name)
+                AND movies.movie_year >= :min_year
+                AND movies.movie_year <= :max_year
+                AND movies.movie_runtime >= :min_runtime
+                AND movies.movie_runtime <= :max_runtime
             GROUP BY
                 movies.movie_id
             ORDER BY
-                movies.movie_name
         """
+    # sql injection opporunity ? :(
+    if sort not in ["name", "year", "runtime", "score"]:
+        raise ValueError
+    if sort == "score":
+        sql = sql + "\nAVG(reviews.review_score)" + "\nDESC NULLS LAST"
+    else:
+        sql = sql + "\nmovies.movie_" + sort
+    result = db.session.execute(
+        text(sql),
+        {
+            "name": "%" + name + "%",
+            "min_year": min_year,
+            "max_year": max_year,
+            "min_runtime": min_runtime,
+            "max_runtime": max_runtime,
+        },
     )
-    result = db.session.execute(sql)
     return result.fetchall()
 
 

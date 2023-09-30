@@ -113,6 +113,15 @@ nav a:hover {
     align-items: center;
 }
 
+.content form.search div.range {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content form.search div.range input {
+    min-width: 0;
+}
+
 .content form.review div input[type=submit] {
     margin-left: 1em;
 }
@@ -128,4 +137,14 @@ nav a:hover {
     table-layout: auto; 
     width: 100%;
 }
+
+.content .sortbar {
+    background: orangered;
+}
+
+.content .sortbar a {
+    color: wheat;
+    text-decoration: underline;
+}
+
 
