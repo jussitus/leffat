@@ -9,6 +9,7 @@ def get_movies(query):
     min_runtime = query.get("min_runtime", default=1)
     max_runtime = query.get("max_runtime", default=2000)
     sort = query.get("sort", default="name")
+    order = query.get("order", default="asc")
 
     sql = """
             SELECT
@@ -31,13 +32,13 @@ def get_movies(query):
                 movies.movie_id
             ORDER BY
         """
-    # sql injection opporunity ? :(
-    if sort not in ["name", "year", "runtime", "score"]:
+    # sql injection opportunity ? :(
+    if sort not in ["name", "year", "runtime", "score"] or order not in ["desc", "asc"]:
         raise ValueError
     if sort == "score":
-        sql = sql + "\nAVG(reviews.review_score)" + "\nDESC NULLS LAST"
+        sql = sql + "\nAVG(reviews.review_score)" + " " + order + " NULLS LAST"
     else:
-        sql = sql + "\nmovies.movie_" + sort
+        sql = sql + "\nmovies.movie_" + sort + " " + order
     result = db.session.execute(
         text(sql),
         {

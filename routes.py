@@ -19,7 +19,14 @@ def movies():
             movies = m.get_movies(query)
         except:
             return render_template("error.html", error="VIRHE: Virheellinen haku.")
-        return render_template("movies.html", movies=movies)
+        query = query.to_dict()
+        query.pop("sort", None)
+        order = query.pop("order", None)
+        if order == "desc": 
+            query["order"] = "asc"
+        else:
+            query["order"] = "desc"
+        return render_template("movies.html", movies=movies, query=query)
     if request.method == "POST":
         movie_name = request.form["movie_name"]
         movie_year = request.form["movie_year"]
