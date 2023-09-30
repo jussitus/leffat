@@ -18,9 +18,10 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Elokuvien sivuilla voi lisätä arvostelun
 - Elokuvien listaan voi lisätä elokuvan
 - Sovelluksen ulkoasu
+- Elokuvien haku
 
 Puuttuu
-- elokuvien haku
+- haku genren/ohjaajan perusteella
 - ylläpitäjän toiminnot
 - peruskäyttäjien rajoittaminen, esim. elokuvaehdotukset menevät jonoon jonka ylläpitäjä käsittelee
 - tunnuksen poistaminen, arvostelujen muokkaaminen/poistaminen
