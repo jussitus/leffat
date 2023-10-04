@@ -6,7 +6,7 @@ def get_average_score(movie_id):
     sql = text(
         """
             SELECT
-                AVG(review_score) 
+                ROUND(AVG(review_score),2) 
             FROM
                 reviews
             WHERE
@@ -14,7 +14,7 @@ def get_average_score(movie_id):
         """
     )
     result = db.session.execute(sql, {"movie_id": movie_id})
-    return round(result.fetchone()[0], 2)
+    return result.fetchone()[0]
 
 
 def add_review(user_id, movie_id, review_text, review_score):

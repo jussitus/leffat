@@ -15,18 +15,25 @@ def index():
 def movies():
     if request.method == "GET":
         query = request.args
+        count = m.get_movie_count(query)
         try:
             movies = m.get_movies(query)
         except:
             return render_template("error.html", error="VIRHE: Virheellinen haku.")
         query = query.to_dict()
-        query.pop("sort", None)
-        order = query.pop("order", None)
-        if order == "desc": 
-            query["order"] = "asc"
-        else:
-            query["order"] = "desc"
-        return render_template("movies.html", movies=movies, query=query)
+        sort = query.pop("sort", "name")
+        page = query.pop("page", "0")
+        order = query.pop("order", "asc")
+        return render_template(
+            "movies.html",
+            movies=movies,
+            query=query,
+            sort=sort,
+            page=page,
+            order=order,
+            count=count,
+        )
+
     if request.method == "POST":
         movie_name = request.form["movie_name"]
         movie_year = request.form["movie_year"]

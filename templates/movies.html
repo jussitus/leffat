@@ -36,14 +36,31 @@
 </details>
 <hr>
 {% endif %}
+
+{% if (page|int)-5 > 0 %}
+<a href="{{ url_for(request.endpoint, page='0', sort=sort, order=order, **query) }}">0 ... </a>
+{% endif %}
+{% for i in range(([0, (page|int)-5]|max), (page|int)) %}
+<a href="{{ url_for(request.endpoint, page=i, sort=sort, order=order, **query) }}">{{i}}</a>
+{% endfor %}
+{{page}}
+{% for i in range((page|int)+1, ([(count|int) + 1, (page|int)+5]|min)) %}
+<a href="{{ url_for(request.endpoint, page=i, sort=sort, order=order, **query) }}">{{i}}</a>
+{% endfor %}
+{% if (count|int) > (page|int)+5 %}
+<a href="{{ url_for(request.endpoint, page=(count|int), sort=sort, order=order, **query) }}"> ... {{(count|int)}}</a>
+{% endif %}
+
+
 {% if (movies|length) > 0 %}
 <table>
     <tbody>
         <tr class="sortbar">
-            <td><a href="{{ url_for(request.endpoint, sort='name', **query) }}">Elokuva</a></td>
-            <td><a href="{{ url_for(request.endpoint, sort='year', **query) }}">Vuosi</a></td>
-            <td><a href="{{ url_for(request.endpoint, sort='runtime', **query) }}">Kesto</a></td>
-            <td><a href="{{ url_for(request.endpoint, sort='score', **query) }}">Arvosana</a></td>
+            {% if order=='desc' %}{% set opposite_order = 'asc' %}{% else %}{% set opposite_order = 'desc' %}{% endif %}
+            <td><a href="{{ url_for(request.endpoint, sort='name', order=opposite_order, **query) }}">Elokuva</a></td>
+            <td><a href="{{ url_for(request.endpoint, sort='year', order=opposite_order, **query) }}">Vuosi</a></td>
+            <td><a href="{{ url_for(request.endpoint, sort='runtime', order=opposite_order, **query) }}">Kesto</a></td>
+            <td><a href="{{ url_for(request.endpoint, sort='score', order=opposite_order, **query) }}">Arvosana</a></td>
         </tr>
         {% for movie in movies %}
         <tr>
@@ -55,6 +72,7 @@
         {% endfor %}
     </tbody>
 </table>
+
 {% else %}
 Elokuvia ei löytynyt...
 {% endif %}
