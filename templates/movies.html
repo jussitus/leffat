@@ -36,7 +36,7 @@
 </details>
 <hr>
 {% endif %}
-
+{% if (count|int) > 0 %}
 {% if (page|int)-5 > 0 %}
 <a href="{{ url_for(request.endpoint, page='0', sort=sort, order=order, **query) }}">0 ... </a>
 {% endif %}
@@ -50,7 +50,7 @@
 {% if (count|int) > (page|int)+5 %}
 <a href="{{ url_for(request.endpoint, page=(count|int), sort=sort, order=order, **query) }}"> ... {{(count|int)}}</a>
 {% endif %}
-
+{% endif %}
 
 {% if (movies|length) > 0 %}
 <table>
