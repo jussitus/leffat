@@ -110,3 +110,20 @@ def signup(username, password, is_admin):
     except:
         return False
     return login(username, password)
+
+def remove_user(user_id):
+    try:
+        sql = text(
+            """
+                DELETE
+                FROM
+                    users
+                WHERE
+                    user_id=:user_id
+            """
+        )
+        db.session.execute(sql, {"user_id":user_id})
+        db.session.commit()
+        return True
+    except:
+        return False

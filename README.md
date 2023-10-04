@@ -20,12 +20,13 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Sovelluksen ulkoasu
 - Elokuvien haku
 - Elokuvalistauksen ja hakutulosten sivutus
+- Ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto)
 
 Puuttuu
 - haku genren/ohjaajan perusteella TULOSSA
-- ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto, genrejen lisääminen) TULOSSA
+- Ylläpitäjän toiminnot (genrejen lisääminen) TULOSSA
 - ~~peruskäyttäjien rajoittaminen, esim. elokuvaehdotukset menevät jonoon jonka ylläpitäjä käsittelee~~ (tekee ohjelman testaamisen liian vaikeaksi)
-- tunnuksen ja arvostelujen poistaminen TULOSSA
+- ~~tunnuksen ja arvostelujen poistaminen~~ (vain ylläpitäjille)
 - ~~arvostelujen muokkaaminen~~
 - kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta (ehkä tulossa?)
 ## Sovelluksen testaaminen

@@ -37,7 +37,13 @@ Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
 {% for review in reviews %}
 "{{review.review_text}}"<br>
 {% for i in range(review.review_score) %}★{% endfor %} - <a href="/user/{{review.review_user_id}}">{{review.user_username}}</a>
-{{review.review_date.strftime("(%-d.%-m.%Y %-H:%-M)")}}
+{{review.review_date.strftime("(%-d.%-m.%Y %-H:%-M)")}} {% if session.is_admin %}
+<form action="/remove_review" method="POST">
+    <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
+    <input type="hidden" name="review_id" value="{{review.review_id}}">
+    <input type="submit" value="POISTA">
+</form>
+{% endif %}
 <hr>
 {% endfor %}
 {% if not reviews %}

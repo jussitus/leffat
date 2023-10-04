@@ -147,6 +147,7 @@ def get_reviews(movie_id):
         """
             SELECT 
                 users.user_username,
+                reviews.review_id,
                 reviews.review_user_id,
                 reviews.review_date, 
                 reviews.review_text, 

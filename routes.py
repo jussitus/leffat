@@ -152,3 +152,22 @@ def remove_movie():
     return render_template(
         "error.html", error="VIRHE: Elokuvan poistaminen ei onnistunut."
     )
+
+@app.route("/remove_user", methods=["POST"])
+def remove_user():
+    user_id = request.form["user_id"]
+    if session["is_admin"] and u.remove_user(user_id):
+        return redirect("/users")
+    return render_template(
+        "error.html", error="VIRHE: Käyttäjätunnuksen poistaminen ei onnistunut."
+    )
+
+@app.route("/remove_review", methods=["POST"])
+def remove_review():
+    review_id = request.form["review_id"]
+    movie_id = request.form["movie_id"]
+    if session["is_admin"] and r.remove_review(review_id):
+        return redirect(f"/movie/{movie_id}")
+    return render_template(
+        "error.html", error="VIRHE: Arvostelun poistaminen ei onnistunut."
+    )
