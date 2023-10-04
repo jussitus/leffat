@@ -4,8 +4,19 @@
 {% block content %}
 <h2>{{movie.movie_name}}</h2>
 <h3>{{movie.movie_year}}</h3>
+<h4>ohjannut OHJAAJA</h4>
+<h4>{{movie.movie_runtime}} min</h4>
+<h4>genre1, genre2, genre3</h4>
 {% if (reviews|length) > 0 %}
 <h4>{{average_score}}</h4>
+{% endif %}
+
+{% if session.is_admin %}
+<form action="/remove_movie" method="POST">
+    <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
+    <label>YLLÄPITÄJÄN TOIMINTO</label>
+    <input type="submit" value="POISTA ELOKUVA">
+</form>
 {% endif %}
 {% if session.username and not reviewed %}
 <hr>
@@ -19,7 +30,7 @@ Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
     <input type="radio" name="review_score" value="3"> ★★★
     <input type="radio" name="review_score" value="4"> ★★★★
     <input type="radio" name="review_score" value="5"> ★★★★★
-    <input type="submit" value="Lisää arvostelu" /></div>
+    <input type="submit" value="Lisää arvostelu"></div>
 </form>
 {% endif %}
 <hr>
@@ -29,4 +40,7 @@ Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
 {{review.review_date.strftime("(%-d.%-m.%Y %-H:%-M)")}}
 <hr>
 {% endfor %}
+{% if not reviews %}
+Ei vielä yhtään arvostelua...
+{% endif %}
 {% endblock %}

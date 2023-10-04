@@ -132,7 +132,7 @@ def signup():
         if u.signup(username, password, False):
             return redirect("/")
         return render_template(
-            "error.html", error="VIRHE: Tunnuksen luominen ei onnistunut :()"
+            "error.html", error="VIRHE: Tunnuksen luominen ei onnistunut."
         )
     return render_template("error.html", error="VIRHE: Väärä metodi!")
 
@@ -141,3 +141,14 @@ def signup():
 def logout():
     session.clear()
     return redirect("/")
+
+
+@app.route("/remove_movie", methods=["POST"])
+def remove_movie():
+    movie_id = request.form["movie_id"]
+    if session["is_admin"] and m.remove_movie(movie_id):
+        return redirect("/movies")
+    
+    return render_template(
+        "error.html", error="VIRHE: Elokuvan poistaminen ei onnistunut."
+    )

@@ -67,16 +67,16 @@ def get_movie_count(query):
 
     sql = text(
         """
-        SELECT
-            COUNT(movie_id)
-        FROM
-            movies
-        WHERE
-            LOWER(movie_name) LIKE LOWER(:name)
-            AND movie_year >= :min_year
-            AND movie_year <= :max_year
-            AND movie_runtime >= :min_runtime
-            AND movie_runtime <= :max_runtime
+            SELECT
+                COUNT(movie_id)
+            FROM
+                movies
+            WHERE
+                LOWER(movie_name) LIKE LOWER(:name)
+                AND movie_year >= :min_year
+                AND movie_year <= :max_year
+                AND movie_runtime >= :min_runtime
+                AND movie_runtime <= :max_runtime
         """
     )
     result = db.session.execute(
@@ -89,7 +89,7 @@ def get_movie_count(query):
             "max_runtime": max_runtime,
         },
     )
-    return result.fetchone()[0] // 100 
+    return result.fetchone()[0] // 100
 
 
 def get_movie(movie_id):
@@ -98,7 +98,8 @@ def get_movie(movie_id):
             SELECT
                 movie_id,
                 movie_name,
-                movie_year 
+                movie_year,
+                movie_runtime
             FROM
                 movies 
             WHERE 
@@ -161,3 +162,21 @@ def get_reviews(movie_id):
     )
     result = db.session.execute(sql, {"movie_id": movie_id})
     return result.fetchall()
+
+
+def remove_movie(movie_id):
+    try:
+        sql = text(
+            """
+                DELETE
+                FROM
+                    movies
+                WHERE
+                    movie_id=:movie_id
+            """
+        )
+        db.session.execute(sql, {"movie_id": movie_id})
+        db.session.commit()
+        return True
+    except:
+        return False
