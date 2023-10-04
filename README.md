@@ -22,11 +22,12 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Elokuvalistauksen ja hakutulosten sivutus
 
 Puuttuu
-- haku genren/ohjaajan perusteella
-- ylläpitäjän toiminnot
-- peruskäyttäjien rajoittaminen, esim. elokuvaehdotukset menevät jonoon jonka ylläpitäjä käsittelee
-- tunnuksen poistaminen, arvostelujen muokkaaminen/poistaminen
-- kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta
+- haku genren/ohjaajan perusteella TULOSSA
+- ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto, genrejen lisääminen) TULOSSA
+- ~~peruskäyttäjien rajoittaminen, esim. elokuvaehdotukset menevät jonoon jonka ylläpitäjä käsittelee~~ (tekee ohjelman testaamisen liian vaikeaksi)
+- tunnuksen ja arvostelujen poistaminen TULOSSA
+- ~~arvostelujen muokkaaminen~~
+- kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta (ehkä tulossa?)
 ## Sovelluksen testaaminen
 
 Voit testata sovellusta paikallisesti näin:
