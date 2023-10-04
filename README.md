@@ -19,6 +19,7 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Elokuvien listaan voi lisätä elokuvan
 - Sovelluksen ulkoasu
 - Elokuvien haku
+- Elokuvalistauksen ja hakutulosten sivutus
 
 Puuttuu
 - haku genren/ohjaajan perusteella
