@@ -38,24 +38,13 @@ def movies():
         movie_name = request.form["movie_name"]
         movie_year = request.form["movie_year"]
         movie_runtime = request.form["movie_runtime"]
-        if not (len(movie_name) > 0 and len(movie_name) <= 200):
-            return render_template(
-                "error.html", error="VIRHE: Elokuvan nimi ei ole 1-200 merkkiä pitkä."
+        if m.add_movie(movie_name, movie_year, movie_runtime):
+            return redirect("/movies")
+        else:
+            render_template(
+                "error.html",
+                error="VIRHE: Varmista, että elokuvan nimen pituus on 1-200 merkkiä, vuosi on väliltä 1900-2099 ja kesto väliltä 1-2000.",
             )
-        if not (movie_year.isdigit()) or not (
-            int(movie_year) >= 1900 and int(movie_year) <= 2099
-        ):
-            return render_template(
-                "error.html", error="VIRHE: Vuosiluku ei ole väliltä 1900-2099."
-            )
-        if not (movie_runtime.isdigit()) or not (
-            int(movie_runtime) > 0 and int(movie_runtime) <= 2000
-        ):
-            return render_template(
-                "error.html", error="VIRHE: Kesto ei ole väliltä 1-2000 minuuttia."
-            )
-        m.add_movie(movie_name, movie_year, movie_runtime)
-        return redirect("/movies")
     return render_template("error.html", error="VIRHE: Väärä metodi!")
 
 
@@ -183,6 +172,7 @@ def admin():
         )
     genres = m.get_genres()
     return render_template("admin.html", genres=genres)
+
 
 @app.route("/add_genre", methods=["POST"])
 def add_genre():
