@@ -12,7 +12,9 @@
             <li><a {% if active_page == "index" %} class="active"{% endif %} href="/">etusivu</a></li>
             <li><a {% if active_page == "movies" %} class="active"{% endif %} href="/movies">elokuvat</a></li>
             <li><a {% if active_page == "users" %} class="active"{% endif %} href="/users">käyttäjät</a></li>
-        
+            {% if session.is_admin %}
+            <li><a {% if active_page == "admin" %} class="active"{% endif %} href="/admin">admin</a></li>
+            {% endif %}
     </nav>
     <div class="content">{% block content %} {% endblock %}</div>
 </body>

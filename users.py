@@ -111,6 +111,7 @@ def signup(username, password, is_admin):
         return False
     return login(username, password)
 
+
 def remove_user(user_id):
     try:
         sql = text(
@@ -122,7 +123,7 @@ def remove_user(user_id):
                     user_id=:user_id
             """
         )
-        db.session.execute(sql, {"user_id":user_id})
+        db.session.execute(sql, {"user_id": user_id})
         db.session.commit()
         return True
     except:

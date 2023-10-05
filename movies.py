@@ -181,3 +181,32 @@ def remove_movie(movie_id):
         return True
     except:
         return False
+
+def add_genre(genre_name):
+    try:
+        sql = text(
+            """
+                INSERT INTO genres
+                    (genre_name)
+                VALUES
+                    (:genre_name)
+            """
+        )
+        db.session.execute(sql, {"genre_name": genre_name})
+        db.session.commit()
+        return True
+    except:
+        return False
+    
+def get_genres():
+    sql = text(
+        """
+            SELECT
+                genre_id,
+                genre_name
+            FROM
+                genres
+        """
+    )
+    result = db.session.execute(sql)
+    return result.fetchall()

@@ -53,6 +53,7 @@ def add_review(user_id, movie_id, review_text, review_score):
     except:
         return False
 
+
 def remove_review(review_id):
     try:
         sql = text(
@@ -64,7 +65,7 @@ def remove_review(review_id):
                     review_id=:review_id
             """
         )
-        db.session.execute(sql, {"review_id":review_id})
+        db.session.execute(sql, {"review_id": review_id})
         db.session.commit()
         return True
     except:

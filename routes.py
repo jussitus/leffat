@@ -148,10 +148,11 @@ def remove_movie():
     movie_id = request.form["movie_id"]
     if session["is_admin"] and m.remove_movie(movie_id):
         return redirect("/movies")
-    
+
     return render_template(
         "error.html", error="VIRHE: Elokuvan poistaminen ei onnistunut."
     )
+
 
 @app.route("/remove_user", methods=["POST"])
 def remove_user():
@@ -162,6 +163,7 @@ def remove_user():
         "error.html", error="VIRHE: Käyttäjätunnuksen poistaminen ei onnistunut."
     )
 
+
 @app.route("/remove_review", methods=["POST"])
 def remove_review():
     review_id = request.form["review_id"]
@@ -170,4 +172,23 @@ def remove_review():
         return redirect(f"/movie/{movie_id}")
     return render_template(
         "error.html", error="VIRHE: Arvostelun poistaminen ei onnistunut."
+    )
+
+
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    if not session["is_admin"]:
+        return render_template(
+            "error.html", error="VIRHE: Ei oikeuksia nähdä tätä sivua."
+        )
+    genres = m.get_genres()
+    return render_template("admin.html", genres=genres)
+
+@app.route("/add_genre", methods=["POST"])
+def add_genre():
+    genre_name = request.form["genre_name"]
+    if m.add_genre(genre_name):
+        return redirect("/admin")
+    return render_template(
+        "error.html", error="VIRHE: Genren lisääminen ei onnistunut."
     )

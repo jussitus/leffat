@@ -8,7 +8,8 @@ CREATE TABLE movies (
     movie_id SERIAL PRIMARY KEY,
     movie_name TEXT NOT NULL UNIQUE,
     movie_year INTEGER NOT NULL,
-    movie_runtime INTEGER NOT NULL
+    movie_runtime INTEGER NOT NULL,
+    CHECK (movie_year >= 1900 and movie_year <= 2099 and movie_runtime >= 1 and movie_runtime <= 2000)
 );
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
@@ -22,7 +23,7 @@ CREATE TABLE reviews (
 );
 CREATE TABLE genres (
     genre_id SERIAL PRIMARY KEY,
-    genre_name TEXT UNIQUE
+    genre_name TEXT NOT NULL UNIQUE
 );
 CREATE TABLE movies_genres (
     movies_genres_movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
