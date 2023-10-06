@@ -9,7 +9,14 @@ CREATE TABLE movies (
     movie_name TEXT NOT NULL UNIQUE,
     movie_year INTEGER NOT NULL,
     movie_runtime INTEGER NOT NULL,
-    CHECK (movie_year >= 1900 and movie_year <= 2099 and movie_runtime >= 1 and movie_runtime <= 2000 and LENGTH(movie_name) >= 1 and LENGTH(movie_name) <= 200)
+    CHECK (
+        movie_year >= 1900 and
+        movie_year <= 2099 and
+        movie_runtime >= 1 and
+        movie_runtime <= 2000 and
+        LENGTH(movie_name) >= 1 and
+        LENGTH(movie_name) <= 200
+    )
 );
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
