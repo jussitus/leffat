@@ -6,9 +6,27 @@
 <h3>{{movie.movie_year}}</h3>
 <h4>ohjannut OHJAAJA</h4>
 <h4>{{movie.movie_runtime}} min</h4>
-<h4>genre1, genre2, genre3</h4>
+<h4>
+    {% for genre in genres %}
+    {{genre.genre_name}}
+    {% endfor %}
+</h4>
 {% if (reviews|length) > 0 %}
 <h4>{{average_score}}</h4>
+{% endif %}
+
+{% if (genre_list|length) > (genres|length) %}
+<form action="/add_movie_to_genre" method="POST">
+    <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
+    <select name="genre_id" id="genre_id">
+        {% for genre in genre_list %}
+        {% if genre not in genres %}
+        <option value="{{genre.genre_id}}">{{genre.genre_name}}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+    <input type="submit" value="Lisää genre elokuvaan">
+</form>
 {% endif %}
 
 {% if session.is_admin %}
@@ -26,17 +44,19 @@ Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
     <textarea id="review_text" name="review_text" maxlength=600 rows=5 cols=45 required></textarea>
     <label for="review_score">Arvosana</label>
     <div><input type="radio" name="review_score" value="1" required> ★
-    <input type="radio" name="review_score" value="2"> ★★
-    <input type="radio" name="review_score" value="3"> ★★★
-    <input type="radio" name="review_score" value="4"> ★★★★
-    <input type="radio" name="review_score" value="5"> ★★★★★
-    <input type="submit" value="Lisää arvostelu"></div>
+        <input type="radio" name="review_score" value="2"> ★★
+        <input type="radio" name="review_score" value="3"> ★★★
+        <input type="radio" name="review_score" value="4"> ★★★★
+        <input type="radio" name="review_score" value="5"> ★★★★★
+        <input type="submit" value="Lisää arvostelu">
+    </div>
 </form>
 {% endif %}
 <hr>
 {% for review in reviews %}
 "{{review.review_text}}"<br>
-{% for i in range(review.review_score) %}★{% endfor %} - <a href="/user/{{review.review_user_id}}">{{review.user_username}}</a>
+{% for i in range(review.review_score) %}★{% endfor %} - <a
+    href="/user/{{review.review_user_id}}">{{review.user_username}}</a>
 {{review.review_date.strftime("(%-d.%-m.%Y %-H:%-M)")}} {% if session.is_admin %}
 <form action="/remove_review" method="POST">
     <input type="hidden" name="movie_id" value="{{movie.movie_id}}">

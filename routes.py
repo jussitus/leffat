@@ -65,6 +65,8 @@ def user(user_id):
 def movie(movie_id):
     if request.method == "GET":
         movie = m.get_movie(movie_id)
+        genres = m.get_genres_by_movie(movie_id)
+        genre_list = m.get_genres()
         reviews = m.get_reviews(movie_id)
         reviewed = any(session.get("id") == review.review_user_id for review in reviews)
         average_score = 0 if len(reviews) == 0 else r.get_average_score(movie_id)
@@ -74,6 +76,8 @@ def movie(movie_id):
             reviews=reviews,
             average_score=average_score,
             reviewed=reviewed,
+            genres=genres,
+            genre_list=genre_list,
         )
     if request.method == "POST":
         user_id = session.get("id")
@@ -181,4 +185,15 @@ def add_genre():
         return redirect("/admin")
     return render_template(
         "error.html", error="VIRHE: Genren lisääminen ei onnistunut."
+    )
+
+
+@app.route("/add_movie_to_genre", methods=["POST"])
+def add_movie_to_genre():
+    genre_id = request.form["genre_id"]
+    movie_id = request.form["movie_id"]
+    if m.add_movie_to_genre(genre_id, movie_id):
+        return redirect(url_for("movie", movie_id=movie_id))
+    return render_template(
+        "error.html", error="VIRHE: Genren lisääminen elokuvaan ei onnistunut."
     )
