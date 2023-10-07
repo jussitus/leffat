@@ -20,11 +20,10 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Sovelluksen ulkoasu
 - Elokuvien haku
 - Elokuvalistauksen ja hakutulosten sivutus
-- Ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto)
+- Ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto, genrejen lisääminen)
 
 Puuttuu
 - haku genren/ohjaajan perusteella TULOSSA
-- Ylläpitäjän toiminnot (genrejen lisääminen) TULOSSA
 - ~~peruskäyttäjien rajoittaminen, esim. elokuvaehdotukset menevät jonoon jonka ylläpitäjä käsittelee~~ (tekee ohjelman testaamisen liian vaikeaksi)
 - ~~tunnuksen ja arvostelujen poistaminen~~ (vain ylläpitäjille)
 - ~~arvostelujen muokkaaminen~~
@@ -43,7 +42,7 @@ Voit testata sovellusta paikallisesti näin:
 
         $ psql sun_tietokanta < schema.sql
         
-4. Määritä tarvittavat ympäristömuuttujat esim. tiedostoon .env näin
+4. Määritä tarvittavat ympäristömuuttujat tiedostoon .env näin
 
         SECRET_KEY=jotain_ihan_mitä_vaan
         DATABASE_URL=postgresql:///sun_tietokanta
@@ -51,3 +50,7 @@ Voit testata sovellusta paikallisesti näin:
 5. Suorita
 
         $ flask run
+
+Lisäksi voit lisätä pääkäyttäjän (tunnus: admin, salasana: admin) näin (pitää olla .env-tiedosto):
+1. 
+        $ python3 ./admin_adder.py
