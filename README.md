@@ -51,6 +51,6 @@ Voit testata sovellusta paikallisesti näin:
 
         $ flask run
 
-Lisäksi voit lisätä pääkäyttäjän (tunnus: admin, salasana: admin) näin (pitää olla .env-tiedosto):
-1. 
+Lisäksi voit lisätä pääkäyttäjän (tunnus: admin, salasana: admin) testaamista varten näin (tarvitsee .env tiedoston toimiakseen): 
+
         $ python3 ./admin_adder.py
