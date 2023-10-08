@@ -51,3 +51,7 @@ Voit testata sovellusta paikallisesti näin:
 Lisäksi voit lisätä pääkäyttäjän (tunnus: admin, salasana: admin) testaamista varten näin (tarvitsee .env tiedoston toimiakseen): 
 
         $ python3 ./admin_adder.py
+
+Sivutusta voi testata ajamalla (tarvitsee myös .env tiedoston, generoi elokuvia tietokantaan):
+
+        $ python3 ./db_populator.py
