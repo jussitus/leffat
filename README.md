@@ -25,7 +25,7 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 Puuttuu
 - haku genren/ohjaajan perusteella TULOSSA
 - kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta (ehkä tulossa?)
-- CSRF-haavoittuvuuden esto
+- CSRF-haavoittuvuuden esto TULOSSA
 ## Sovelluksen testaaminen
 
 Voit testata sovellusta paikallisesti näin:
