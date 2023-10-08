@@ -24,9 +24,6 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 
 Puuttuu
 - haku genren/ohjaajan perusteella TULOSSA
-- ~~peruskäyttäjien rajoittaminen, esim. elokuvaehdotukset menevät jonoon jonka ylläpitäjä käsittelee~~ (tekee ohjelman testaamisen liian vaikeaksi)
-- ~~tunnuksen ja arvostelujen poistaminen~~ (vain ylläpitäjille)
-- ~~arvostelujen muokkaaminen~~
 - kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta (ehkä tulossa?)
 ## Sovelluksen testaaminen
 
