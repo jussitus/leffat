@@ -15,7 +15,7 @@
 <h4>{{average_score}}</h4>
 {% endif %}
 
-{% if (genre_list|length) > (genres|length) %}
+{% if session.username and (genre_list|length) > (genres|length) %}
 <form action="/add_movie_to_genre" method="POST">
     <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
     <select name="genre_id" id="genre_id">
