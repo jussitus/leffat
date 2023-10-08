@@ -181,7 +181,7 @@ def admin():
 @app.route("/add_genre", methods=["POST"])
 def add_genre():
     genre_name = request.form["genre_name"]
-    if m.add_genre(genre_name):
+    if session["is_admin"] and m.add_genre(genre_name):
         return redirect("/admin")
     return render_template(
         "error.html", error="VIRHE: Genren lisääminen ei onnistunut."
@@ -192,7 +192,7 @@ def add_genre():
 def add_movie_to_genre():
     genre_id = request.form["genre_id"]
     movie_id = request.form["movie_id"]
-    if m.add_movie_to_genre(genre_id, movie_id):
+    if session["username"] and m.add_movie_to_genre(genre_id, movie_id):
         return redirect(url_for("movie", movie_id=movie_id))
     return render_template(
         "error.html", error="VIRHE: Genren lisääminen elokuvaan ei onnistunut."
