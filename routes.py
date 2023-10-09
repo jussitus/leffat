@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, session, url_for
+from flask import abort, redirect, render_template, request, session, url_for
 from app import app
 import movies as m
 import users as u
@@ -35,6 +35,8 @@ def movies():
         )
 
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         movie_name = request.form["movie_name"]
         movie_year = request.form["movie_year"]
         movie_runtime = request.form["movie_runtime"]
@@ -80,6 +82,8 @@ def movie(movie_id):
             genre_list=genre_list,
         )
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         user_id = session.get("id")
         review_text = request.form["review_text"]
         review_score = request.form["review_score"]
@@ -138,6 +142,8 @@ def logout():
 
 @app.route("/remove_movie", methods=["POST"])
 def remove_movie():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     movie_id = request.form["movie_id"]
     if session["is_admin"] and m.remove_movie(movie_id):
         return redirect("/movies")
@@ -149,6 +155,8 @@ def remove_movie():
 
 @app.route("/remove_user", methods=["POST"])
 def remove_user():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     user_id = request.form["user_id"]
     if session["is_admin"] and u.remove_user(user_id):
         return redirect("/users")
@@ -159,6 +167,8 @@ def remove_user():
 
 @app.route("/remove_review", methods=["POST"])
 def remove_review():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     review_id = request.form["review_id"]
     movie_id = request.form["movie_id"]
     if session["is_admin"] and r.remove_review(review_id):
@@ -168,7 +178,7 @@ def remove_review():
     )
 
 
-@app.route("/admin", methods=["GET", "POST"])
+@app.route("/admin")
 def admin():
     if not session["is_admin"]:
         return render_template(
@@ -180,6 +190,8 @@ def admin():
 
 @app.route("/add_genre", methods=["POST"])
 def add_genre():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     genre_name = request.form["genre_name"]
     if session["is_admin"] and m.add_genre(genre_name):
         return redirect("/admin")
@@ -190,6 +202,8 @@ def add_genre():
 
 @app.route("/add_movie_to_genre", methods=["POST"])
 def add_movie_to_genre():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     genre_id = request.form["genre_id"]
     movie_id = request.form["movie_id"]
     if session["username"] and m.add_movie_to_genre(genre_id, movie_id):

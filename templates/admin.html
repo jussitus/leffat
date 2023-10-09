@@ -6,6 +6,7 @@ HUOM. Elokuvien, käyttäjien ja arvostelujen poistaminen tapahtuu niiden omilla
 <br><br>
 <form action="/add_genre" method="POST" autocomplete="off">
     <label for="genre_name">Lisää genre</label>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="text" id="genre_name" name="genre_name" minlength=1 maxlength=20 required>
     <input type="submit" value="Lähetä">
 </form>

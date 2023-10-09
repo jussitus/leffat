@@ -25,6 +25,7 @@
 <details>
     <summary>Eikö elokuvaa löydy listalta? Voit lisätä sen itse!</summary>
     <form action="/movies" method="POST" autocomplete="off">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <label for="movie_name">Elokuvan nimi</label>
         <input type="text" id="movie_name" name="movie_name" minlength=1 maxlength=200 required>
         <label for="movie_name">Julkaisuvuosi</label>
