@@ -1,4 +1,4 @@
-from flask import abort, redirect, render_template, request, session, url_for
+from flask import abort, flash, redirect, render_template, request, session, url_for
 from app import app
 import movies as m
 import users as u
@@ -43,10 +43,8 @@ def movies():
         if m.add_movie(movie_name, movie_year, movie_runtime):
             return redirect("/movies")
         else:
-            render_template(
-                "error.html",
-                error="VIRHE: Varmista, että elokuvan nimen pituus on 1-200 merkkiä, vuosi on väliltä 1900-2099 ja kesto väliltä 1-2000.",
-            )
+            flash("Elokuvan lisääminen ei onnistunut. Se on mahdollisesti jo lisätty aiemmin!")
+            return redirect("/movies")
     return render_template("error.html", error="VIRHE: Väärä metodi!")
 
 
