@@ -28,7 +28,7 @@
 
     {% if session.username %}
     <div>
-        <span>Eikö elokuvaa löydy listalta? Voit lisätä sen itse!</span>
+        <span>Eikö elokuvaa löydy listalta? Lisää se itse!</span>
         <form action="/movies" method="POST" autocomplete="off">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <label for="movie_name">Elokuvan nimi</label>
@@ -40,10 +40,10 @@
             <input type="submit" value="Lisää elokuva">
         </form>
     </div>
-
+    {% endif %}
 </div>
 <hr>
-{% endif %}
+
 {% if (count|int) > 0 %}
 {% if (page|int)-5 > 0 %}
 <a href="{{ url_for(request.endpoint, page='0', sort=sort, order=order, **query) }}">0 ... </a>
