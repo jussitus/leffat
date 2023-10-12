@@ -4,14 +4,7 @@ from db import db
 
 def get_average_score(movie_id):
     sql = text(
-        """
-            SELECT
-                ROUND(AVG(review_score),2) 
-            FROM
-                reviews
-            WHERE
-                review_movie_id=:movie_id
-        """
+        "SELECT ROUND(AVG(review_score),2) FROM reviews WHERE review_movie_id=:movie_id"
     )
     result = db.session.execute(sql, {"movie_id": movie_id})
     return result.fetchone()[0]
@@ -20,24 +13,9 @@ def get_average_score(movie_id):
 def add_review(user_id, movie_id, review_text, review_score):
     try:
         sql = text(
-            """
-                INSERT INTO reviews
-                    (
-                        review_user_id,
-                        review_movie_id,
-                        review_date,
-                        review_text,
-                        review_score
-                    )
-                VALUES 
-                    (
-                        :user_id,
-                        :movie_id,
-                        NOW(),
-                        :review_text,
-                        :review_score
-                    )
-            """
+            "INSERT INTO reviews (review_user_id, review_movie_id, "
+            "review_date, review_text, review_score) "
+            "VALUES(:user_id, :movie_id, NOW(), :review_text, :review_score) "
         )
         db.session.execute(
             sql,
@@ -56,15 +34,7 @@ def add_review(user_id, movie_id, review_text, review_score):
 
 def remove_review(review_id):
     try:
-        sql = text(
-            """
-                DELETE
-                FROM
-                    reviews
-                WHERE
-                    review_id=:review_id
-            """
-        )
+        sql = text("DELETE FROM reviews WHERE review_id=:review_id")
         db.session.execute(sql, {"review_id": review_id})
         db.session.commit()
         return True

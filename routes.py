@@ -19,7 +19,10 @@ def movies():
         try:
             movies = m.get_movies(query)
         except:
-            return render_template("error.html", error="VIRHE: Virheellinen haku.")
+            flash(
+                "Virheellinen haku!"
+            )
+            return redirect("/movies")
         query = query.to_dict()
         sort = query.pop("sort", "name")
         page = query.pop("page", "0")
