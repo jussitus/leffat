@@ -165,3 +165,7 @@ nav a:hover {
     max-width: 30em;
 }
 
+nav ul.flashes {
+    color: red;
+    font-weight: bold;
+}

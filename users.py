@@ -51,6 +51,13 @@ def login(username, password):
 
 def signup(username, password, is_admin):
     hash_value = generate_password_hash(password)
+    if (
+        len(username) < 1
+        or len(username) > 30
+        or len(password) < 1
+        or len(password) > 30
+    ):
+        return False
     try:
         sql = text(
             "INSERT INTO users (user_username, user_password, user_isadmin) "

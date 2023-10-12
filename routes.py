@@ -19,9 +19,7 @@ def movies():
         try:
             movies = m.get_movies(query)
         except:
-            flash(
-                "Virheellinen haku!"
-            )
+            flash("Virheellinen haku!")
             return redirect("/movies")
         query = query.to_dict()
         sort = query.pop("sort", "name")
@@ -45,13 +43,16 @@ def movies():
         movie_year = request.form["movie_year"]
         movie_runtime = request.form["movie_runtime"]
         if m.add_movie(movie_name, movie_year, movie_runtime):
+            flash("Elokuva lisätty!")
             return redirect("/movies")
         else:
             flash(
                 "Elokuvan lisääminen ei onnistunut. Se on mahdollisesti jo lisätty aiemmin!"
             )
             return redirect("/movies")
-    return render_template("error.html", error="VIRHE: Väärä metodi!")
+    return render_template(
+        "error.html", error="VIRHE: Väärä metodi! Tänne ei pitäisi päästä normaalisti."
+    )
 
 
 @app.route("/users")
@@ -91,19 +92,15 @@ def movie(movie_id):
         user_id = session.get("id")
         review_text = request.form["review_text"]
         review_score = request.form["review_score"]
-        if not (len(review_text) <= 600 and len(review_text) > 0):
-            return render_template(
-                "error.html", error="VIRHE: Arvostelu ei ole 1-600 merkkiä pitkä."
-            )
-        if not (review_score.isdigit()) or not (
-            int(review_score) > 0 and int(review_score) <= 5
-        ):
-            return render_template(
-                "error.html", error="VIRHE: Arvosana ei ole väliltä 1-10."
-            )
-        r.add_review(user_id, movie_id, review_text, review_score)
-        return redirect(url_for("movie", movie_id=movie_id))
-    return render_template("error.html", error="VIRHE: Väärä metodi!")
+        if r.add_review(user_id, movie_id, review_text, review_score):
+            return redirect(url_for("movie", movie_id=movie_id))
+        return render_template(
+            "error.html",
+            error="VIRHE: Arvostelun lisääminen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
+        )
+    return render_template(
+        "error.html", error="VIRHE: Väärä metodi! Tänne ei pitäisi päästä normaalisti."
+    )
 
 
 @app.route("/login", methods=["POST"])
@@ -112,7 +109,8 @@ def login():
     password = request.form["password"]
     if u.login(username, password):
         return redirect("/")
-    return render_template("error.html", error="VIRHE: Väärä tunnus tai salasana.")
+    flash("Väärä tunnus tai salasana!")
+    return redirect("/")
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -122,20 +120,12 @@ def signup():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if not (len(username) > 0 and len(username) <= 30):
-            return render_template(
-                "error.html", error="VIRHE: Tunnuksen tulee olla 1-30 merkkiä pitkä."
-            )
-        if not (len(password) > 0 and len(password) <= 30):
-            return render_template(
-                "error.html", error="VIRHE: Salasanan tulee olla 1-30 merkkiä pitkä."
-            )
         if u.signup(username, password, False):
             return redirect("/")
         return render_template(
-            "error.html", error="VIRHE: Tunnuksen luominen ei onnistunut."
+            "error.html",
+            error="VIRHE: Tunnuksen luominen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
         )
-    return render_template("error.html", error="VIRHE: Väärä metodi!")
 
 
 @app.route("/logout")
@@ -153,7 +143,8 @@ def remove_movie():
         return redirect("/movies")
 
     return render_template(
-        "error.html", error="VIRHE: Elokuvan poistaminen ei onnistunut."
+        "error.html",
+        error="VIRHE: Elokuvan poistaminen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
     )
 
 
@@ -165,7 +156,8 @@ def remove_user():
     if session["is_admin"] and u.remove_user(user_id):
         return redirect("/users")
     return render_template(
-        "error.html", error="VIRHE: Käyttäjätunnuksen poistaminen ei onnistunut."
+        "error.html",
+        error="VIRHE: Käyttäjätunnuksen poistaminen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
     )
 
 
@@ -178,18 +170,17 @@ def remove_review():
     if session["is_admin"] and r.remove_review(review_id):
         return redirect(f"/movie/{movie_id}")
     return render_template(
-        "error.html", error="VIRHE: Arvostelun poistaminen ei onnistunut."
+        "error.html",
+        error="VIRHE: Arvostelun poistaminen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
     )
 
 
 @app.route("/admin")
 def admin():
-    if not session["is_admin"]:
-        return render_template(
-            "error.html", error="VIRHE: Ei oikeuksia nähdä tätä sivua."
-        )
-    genres = m.get_genres()
-    return render_template("admin.html", genres=genres)
+    if session and session["is_admin"]:
+        genres = m.get_genres()
+        return render_template("admin.html", genres=genres)
+    return render_template("error.html", error="VIRHE: Ei oikeuksia nähdä tätä sivua.")
 
 
 @app.route("/add_genre", methods=["POST"])
@@ -199,10 +190,11 @@ def add_genre():
     genre_name = request.form["genre_name"]
     if session["is_admin"] and m.add_genre(genre_name):
         return redirect("/admin")
-    flash(
-        "Genre lisääminen ei onnistunut!"
+    return render_template(
+        "error.html",
+        error="VIRHE: Genren lisääminen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
     )
-    return redirect("/admin")
+
 
 @app.route("/add_movie_to_genre", methods=["POST"])
 def add_movie_to_genre():
@@ -213,5 +205,6 @@ def add_movie_to_genre():
     if session["username"] and m.add_movie_to_genre(genre_id, movie_id):
         return redirect(url_for("movie", movie_id=movie_id))
     return render_template(
-        "error.html", error="VIRHE: Genren lisääminen elokuvaan ei onnistunut."
+        "error.html",
+        error="VIRHE: Genren lisääminen elokuvaan ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
     )
