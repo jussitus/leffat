@@ -10,12 +10,12 @@ def index():
     return render_template("index.html")
 
 
-# pylint says too many returns
 @app.route("/movies", methods=["GET", "POST"])
 def movies():
     if request.method == "GET":
         query = request.args
         count = m.get_movie_count(query)
+        genres = m.get_genres()
         try:
             movies = m.get_movies(query)
         except:
@@ -27,6 +27,7 @@ def movies():
         return render_template(
             "movies.html",
             movies=movies,
+            genres=genres,
             query=query,
             sort=sort,
             page=page,
@@ -43,7 +44,9 @@ def movies():
         if m.add_movie(movie_name, movie_year, movie_runtime):
             return redirect("/movies")
         else:
-            flash("Elokuvan lisääminen ei onnistunut. Se on mahdollisesti jo lisätty aiemmin!")
+            flash(
+                "Elokuvan lisääminen ei onnistunut. Se on mahdollisesti jo lisätty aiemmin!"
+            )
             return redirect("/movies")
     return render_template("error.html", error="VIRHE: Väärä metodi!")
 
@@ -193,10 +196,10 @@ def add_genre():
     genre_name = request.form["genre_name"]
     if session["is_admin"] and m.add_genre(genre_name):
         return redirect("/admin")
-    return render_template(
-        "error.html", error="VIRHE: Genren lisääminen ei onnistunut."
+    flash(
+        "Genre lisääminen ei onnistunut!"
     )
-
+    return redirect("/admin")
 
 @app.route("/add_movie_to_genre", methods=["POST"])
 def add_movie_to_genre():

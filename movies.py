@@ -11,8 +11,10 @@ def get_movies(query):
     sort = query.get("sort", default="name")
     order = query.get("order", default="asc")
     page = query.get("page", default=0)
+    genre = query.get("genre", default="")
 
-    sql = """
+    sql = (
+        """
             SELECT
                 COUNT(movies.movie_id),
                 movies.movie_id,
@@ -21,20 +23,38 @@ def get_movies(query):
                 movies.movie_runtime,
                 AVG(reviews.review_score)
             FROM
-                movies LEFT JOIN reviews
-            ON
-                movies.movie_id = reviews.review_movie_id
+                movies LEFT JOIN reviews ON movies.movie_id = reviews.review_movie_id
+        """
+        + (
+            """,
+                movies_genres,
+                genres"""
+            if genre
+            else ""
+        )
+        + """
             WHERE
                 LOWER(movies.movie_name) LIKE LOWER(:name)
                 AND movies.movie_year >= :min_year
                 AND movies.movie_year <= :max_year
                 AND movies.movie_runtime >= :min_runtime
                 AND movies.movie_runtime <= :max_runtime
+        """
+        + (
+            """
+                AND movies.movie_id = movies_genres_movie_id
+                AND movies_genres_genre_id = genre_id
+                AND genre_name = :genre
+            """
+            if genre
+            else ""
+        )
+        + """
             GROUP BY
                 movies.movie_id
             ORDER BY
         """
-    # sql injection opportunity ? :(
+    )
     if sort not in ["name", "year", "runtime", "score"] or order not in ["desc", "asc"]:
         raise ValueError
     if sort == "score":
@@ -53,6 +73,7 @@ def get_movies(query):
             "max_runtime": max_runtime,
             # hardcoded items per page !!
             "page": int(page) * 100,
+            "genre": genre,
         },
     )
     return result.fetchall()
@@ -64,6 +85,7 @@ def get_movie_count(query):
     max_year = query.get("max_year", default=2099)
     min_runtime = query.get("min_runtime", default=1)
     max_runtime = query.get("max_runtime", default=2000)
+    genre = query.get("genre", default="")
 
     sql = text(
         """
@@ -71,6 +93,16 @@ def get_movie_count(query):
                 COUNT(movie_id)
             FROM
                 movies
+        """
+        + (
+            """,
+                movies_genres,
+                genres
+            """
+            if genre
+            else ""
+        )
+        + """
             WHERE
                 LOWER(movie_name) LIKE LOWER(:name)
                 AND movie_year >= :min_year
@@ -78,6 +110,15 @@ def get_movie_count(query):
                 AND movie_runtime >= :min_runtime
                 AND movie_runtime <= :max_runtime
         """
+        + (
+            """
+                AND movie_id = movies_genres_movie_id
+                AND movies_genres_genre_id = genre_id
+                AND genre_name = :genre
+            """
+            if genre
+            else ""
+        )
     )
     result = db.session.execute(
         sql,
@@ -87,6 +128,7 @@ def get_movie_count(query):
             "max_year": max_year,
             "min_runtime": min_runtime,
             "max_runtime": max_runtime,
+            "genre": genre,
         },
     )
     return result.fetchone()[0] // 100
