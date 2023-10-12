@@ -22,9 +22,9 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Elokuvalistauksen ja hakutulosten sivutus
 - Ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto, genrejen lisääminen)
 
-Puuttuu
-- haku genren/ohjaajan perusteella TULOSSA
-- kaikenlaista muuta, esim. bisneslogiikkaa pois routes-tiedostosta (ehkä tulossa?)
+TODO
+- vaihda error-sivut flash-viesteiksi
+- poista käyttämättömät taulut (ohjaajat)
 ## Sovelluksen testaaminen
 
 Voit testata sovellusta paikallisesti näin:
