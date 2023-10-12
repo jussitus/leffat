@@ -23,8 +23,7 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto, genrejen lisääminen)
 
 TODO
-- vaihda error-sivut flash-viesteiksi
-- poista käyttämättömät taulut (ohjaajat)
+- ohjaajat?
 ## Sovelluksen testaaminen
 
 Voit testata sovellusta paikallisesti näin:
