@@ -25,8 +25,8 @@
         <option value="{{genre.genre_id}}">{{genre.genre_name}}</option>
         {% endif %}
         {% endfor %}
-    </select>
-    <input type="submit" value="Lisää genre elokuvaan">
+    </select><br>
+    <input type="submit" value="Lisää genre">
 </form>
 {% endif %}
 
@@ -34,8 +34,8 @@
 <form action="/remove_movie" method="POST">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
-    <label>YLLÄPITÄJÄN TOIMINTO</label>
-    <input type="submit" value="POISTA ELOKUVA">
+    <label>Ylläpitäjän toiminto</label>
+    <input type="submit" value="Poista elokuva">
 </form>
 {% endif %}
 {% if session.username and not reviewed %}
@@ -51,8 +51,8 @@ Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
         <input type="radio" name="review_score" value="3"> ★★★
         <input type="radio" name="review_score" value="4"> ★★★★
         <input type="radio" name="review_score" value="5"> ★★★★★
-        <input type="submit" value="Lisää arvostelu">
     </div>
+    <input type="submit" value="Lisää arvostelu">
 </form>
 {% endif %}
 <hr>

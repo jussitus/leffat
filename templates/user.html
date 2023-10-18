@@ -6,8 +6,8 @@
 <form action="/remove_user" method="POST">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="hidden" name="user_id" value="{{user.user_id}}">
-    <label>YLLÄPITÄJÄN TOIMINTO</label>
-    <input type="submit" value="POISTA KÄYTTÄJÄ">
+    <label>Ylläpitäjän toiminto</label>
+    <input type="submit" value="Poista käyttäjä">
 </form>
 {% endif %}
 {% if (reviews|length) > 0 %}

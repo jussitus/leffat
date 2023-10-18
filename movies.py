@@ -148,7 +148,7 @@ def remove_movie(movie_id):
 
 def add_genre(genre_name):
     try:
-        sql = text("INSERT INTO genres (genre_name) VALUES (:genre_name)")
+        sql = text("INSERT INTO genres (genre_name) VALUES (INITCAP(:genre_name))")
         db.session.execute(sql, {"genre_name": genre_name})
         db.session.commit()
         return True

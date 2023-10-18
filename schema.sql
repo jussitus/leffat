@@ -37,12 +37,7 @@ CREATE TABLE movies_genres (
     movies_genres_genre_id INTEGER REFERENCES genres ON DELETE CASCADE,
     PRIMARY KEY (movies_genres_movie_id, movies_genres_genre_id)
 );
-CREATE TABLE directors (
-    director_id SERIAL PRIMARY KEY,
-    director_name TEXT NOT NULL UNIQUE
-);
-CREATE TABLE movies_directors (
-    movies_directors_movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
-    movies_directors_director_id INTEGER REFERENCES directors ON DELETE CASCADE,
-    PRIMARY KEY (movies_directors_movie_id, movies_directors_director_id)
-);
+
+CREATE UNIQUE INDEX user_unique ON users(LOWER(user_username));
+CREATE UNIQUE INDEX movie_unique ON movies(LOWER(movie_name));
+CREATE UNIQUE INDEX genre_unique ON genres(LOWER(genre_name));

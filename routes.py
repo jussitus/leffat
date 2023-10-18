@@ -190,10 +190,8 @@ def add_genre():
     genre_name = request.form["genre_name"]
     if session["is_admin"] and m.add_genre(genre_name):
         return redirect("/admin")
-    return render_template(
-        "error.html",
-        error="VIRHE: Genren lisääminen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
-    )
+    flash("Genren lisääminen ei onnistunut. Se on mahdollisesti jo lisätty aiemmin!")
+    return redirect("/admin")
 
 
 @app.route("/add_movie_to_genre", methods=["POST"])

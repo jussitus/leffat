@@ -15,7 +15,7 @@
                 <input type="number" id="year_max_q" name="max_year" min="1900" max="2099" value="2099" step="1"
                     required>
             </div>
-            <label>Kesto</label>
+            <label>Kesto (minuuttia)</label>
             <div class="range">
                 <input type="number" id="runtime_min_q" name="min_runtime" min="1" max="2099" value="1" step="1"
                     required>
@@ -38,12 +38,13 @@
         <span>Eikö elokuvaa löydy listalta? Lisää se itse!</span>
         <form action="/movies" method="POST" autocomplete="off">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            <label for="movie_name">Elokuvan nimi</label>
+            <label for="movie_name">Nimi</label>
             <input type="text" id="movie_name" name="movie_name" minlength=1 maxlength=200 required>
-            <label for="movie_name">Julkaisuvuosi</label>
+            <label for="movie_name">Vuosi</label>
             <input type="number" id="movie_year" name="movie_year" min="1900" max="2099" value="2023" step="1" required>
             <label for="movie_runtime">Kesto (minuuttia)</label>
             <input type="number" id="movie_runtime " name="movie_runtime" min="1" max="2000" required>
+            <span></span><span></span>
             <input type="submit" value="Lisää elokuva">
         </form>
     </div>

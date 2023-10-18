@@ -38,7 +38,8 @@ nav a {
     padding: .5em;
 }
 
-nav a:focus, .active {
+nav a:focus,
+.active {
     background: orangered;
     color: wheat
 }
@@ -80,7 +81,7 @@ nav a:hover {
     overflow: visible;
     text-align: center;
     height: 5px;
-  }
+}
 
 .content hr:after {
     background: wheat;
@@ -88,7 +89,7 @@ nav a:hover {
     padding: 0 4px;
     position: relative;
     top: -13px;
-  }
+}
 
 .content form {
     display: grid;
@@ -105,7 +106,7 @@ nav a:hover {
 .content form.review {
     display: grid;
     max-width: 40em;
-    grid-template-columns: 5em 30em;
+    grid-template-columns: 10em 30em;
     grid-row-gap: .3em;
     padding: 5px;
     text-align: left;
@@ -134,7 +135,7 @@ nav a:hover {
 
 .content table {
     border-collapse: collapse;
-    table-layout: auto; 
+    table-layout: auto;
     width: 100%;
 }
 
@@ -158,6 +159,7 @@ nav a:hover {
     margin: .5em;
     padding: .5em;
 }
+
 .content div.movie_search form {
     border: solid orangered;
     margin: .5em;
@@ -165,7 +167,34 @@ nav a:hover {
     max-width: 30em;
 }
 
+.content div.movie_search form span {
+    padding: 0;
+    height: .5em;
+}
+
 nav ul.flashes {
     color: red;
     font-weight: bold;
+}
+
+
+input[type=submit] {
+    border: 0;
+    line-height: 1.75;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    color: wheat;
+    background-color: orangered;
+}
+
+input[type=submit]:hover {
+    background-color: rgb(189, 50, 0);
+}
+
+
+input[type=submit]:active {
+    box-shadow:
+        inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+        inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
