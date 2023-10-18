@@ -2,9 +2,7 @@
 {% set active_page = "movies" %}
 {% block title %}{{movie.movie_name}}{% endblock %}
 {% block content %}
-<h2>{{movie.movie_name}}</h2>
-<h3>{{movie.movie_year}}</h3>
-<h4>ohjannut OHJAAJA</h4>
+<h2>{{movie.movie_name}} ({{movie.movie_year}})</h2>
 <h4>{{movie.movie_runtime}} min</h4>
 <h4>
     {% for genre in genres %}
@@ -65,7 +63,7 @@ Et ole vielä arvostellut elokuvaa {{movie.movie_name}}. Kirjoita arvostelu nyt!
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
     <input type="hidden" name="review_id" value="{{review.review_id}}">
-    <input type="submit" value="POISTA">
+    <input type="submit" value="Poista">
 </form>
 {% endif %}
 <hr>

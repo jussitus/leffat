@@ -53,17 +53,17 @@
 <hr>
 
 {% if (count|int) > 0 %}
-{% if (page|int)-5 > 0 %}
+{% if (page|int)-3 > 0 %}
 <a href="{{ url_for(request.endpoint, page='0', sort=sort, order=order, **query) }}">0 ... </a>
 {% endif %}
-{% for i in range(([0, (page|int)-5]|max), (page|int)) %}
+{% for i in range(([0, (page|int)-3]|max), (page|int)) %}
 <a href="{{ url_for(request.endpoint, page=i, sort=sort, order=order, **query) }}">{{i}}</a>
 {% endfor %}
 {{page}}
-{% for i in range((page|int)+1, ([(count|int) + 1, (page|int)+5]|min)) %}
+{% for i in range((page|int)+1, ([(count|int) + 1, (page|int)+3]|min)) %}
 <a href="{{ url_for(request.endpoint, page=i, sort=sort, order=order, **query) }}">{{i}}</a>
 {% endfor %}
-{% if (count|int) > (page|int)+5 %}
+{% if (count|int) > (page|int)+3 %}
 <a href="{{ url_for(request.endpoint, page=(count|int), sort=sort, order=order, **query) }}"> ... {{(count|int)}}</a>
 {% endif %}
 {% endif %}

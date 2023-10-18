@@ -122,11 +122,10 @@ def signup():
         password = request.form["password"]
         if u.signup(username, password, False):
             return redirect("/")
-        return render_template(
-            "error.html",
-            error="VIRHE: Tunnuksen luominen ei onnistunut! Tänne ei pitäisi päästä normaalisti.",
+        flash(
+            "Tunnuksen luominen ei onnistunut. Kokeile toista nimeä."
         )
-
+        return redirect("/signup")
 
 @app.route("/logout")
 def logout():
