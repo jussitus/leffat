@@ -11,7 +11,9 @@ Sovelluksessa näkyy elokuvia ja käyttäjien arvosteluita niistä. Arvostelut n
 - Ylläpitäjä voi lisätä, muokata ja poistaa elokuvia ja arvosteluita. 
 
 ## Sovelluksen nykytilanne
-Ominaisuuksia jotka toimivat nyt joten kuten
+Sovellus on nyt "valmis".
+
+Ominaisuuksia jotka toimivat joten kuten
 - Tunnuksen luominen ja kirjautuminen sisään/ulos
 - Listaukset elokuvista ja käyttäjistä
 - Elokuvien ja käyttäjien sivuilla listaus arvosteluista
@@ -23,7 +25,7 @@ Ominaisuuksia jotka toimivat nyt joten kuten
 - Ylläpitäjän toiminnot (elokuvien, arvostelujen ja käyttäjien poisto, genrejen lisääminen)
 
 TODO
-- ohjaajat?
+- ~~ohjaajat~~? ei tule  
 ## Sovelluksen testaaminen
 
 Voit testata sovellusta paikallisesti näin:
