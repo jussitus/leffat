@@ -45,11 +45,10 @@ def movies():
         if m.add_movie(movie_name, movie_year, movie_runtime):
             flash("Elokuva lisätty!")
             return redirect("/movies")
-        else:
-            flash(
-                "Elokuvan lisääminen ei onnistunut. Se on mahdollisesti jo lisätty aiemmin!"
-            )
-            return redirect("/movies")
+        flash(
+            "Elokuvan lisääminen ei onnistunut. Se on mahdollisesti jo lisätty aiemmin!"
+        )
+        return redirect("/movies")
     return render_template(
         "error.html", error="VIRHE: Väärä metodi! Tänne ei pitäisi päästä normaalisti."
     )
@@ -122,10 +121,10 @@ def signup():
         password = request.form["password"]
         if u.signup(username, password, False):
             return redirect("/")
-        flash(
-            "Tunnuksen luominen ei onnistunut. Kokeile toista nimeä."
-        )
+        flash("Tunnuksen luominen ei onnistunut. Kokeile toista nimeä.")
         return redirect("/signup")
+    return redirect("/")
+
 
 @app.route("/logout")
 def logout():

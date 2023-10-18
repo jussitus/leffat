@@ -6,7 +6,9 @@ from db import db
 
 
 def get_user(user_id):
-    sql = text("SELECT user_id, user_username, user_isadmin FROM users WHERE user_id=:user_id")
+    sql = text(
+        "SELECT user_id, user_username, user_isadmin FROM users WHERE user_id=:user_id"
+    )
     result = db.session.execute(sql, {"user_id": user_id})
     return result.fetchone()
 
