@@ -1,6 +1,6 @@
 # Leffatus
 Elokuvien arvostelusovellus
-
+## Alkuperäinen suunnitelma
 Sovelluksessa näkyy elokuvia ja käyttäjien arvosteluita niistä. Arvostelut näkyvät myös käyttäjien profiileissa.
 - Käyttäjä voi luoda uuden tunnuksen ja kirjautua sisään tai ulos.
 - Käyttäjä näkee listan elokuvista jonka voi järjestää eri tavoin.
@@ -11,7 +11,6 @@ Sovelluksessa näkyy elokuvia ja käyttäjien arvosteluita niistä. Arvostelut n
 - Ylläpitäjä voi lisätä, muokata ja poistaa elokuvia ja arvosteluita. 
 
 ## Sovelluksen nykytilanne
-Sovellus on nyt "valmis".
 
 Ominaisuuksia jotka toimivat joten kuten
 - Tunnuksen luominen ja kirjautuminen sisään/ulos
